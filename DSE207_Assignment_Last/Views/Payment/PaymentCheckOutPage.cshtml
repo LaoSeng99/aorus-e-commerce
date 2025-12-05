@@ -1,0 +1,236 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+            background-image: url('data:image/svg+xml,%3Csvg width="52" height="26" viewBox="0 0 52 26" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z" /%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+
+        .col-25 {
+            -ms-flex: 25%;
+            flex: 25%;
+        }
+
+        .col-50 {
+            -ms-flex: 50%;
+            flex: 50%;
+        }
+
+        .col-75 {
+            -ms-flex: 75%;
+            flex: 75%;
+        }
+
+        .col-25,
+        .col-50,
+        .col-75 {
+            padding: 0 16px;
+        }
+
+        .container {
+            background-color: #f2f2f2;
+            padding: 5px 20px 15px 20px;
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+        }
+
+
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #2196F3;
+        }
+
+        hr {
+            border: 1px solid lightgrey;
+        }
+
+        span.price {
+            float: right;
+            color: grey;
+        }
+
+        /* Responsive layout */
+        @@media (max-width: 800px) {
+            .row {
+                flex-direction: column-reverse;
+            }
+
+            .col-25 {
+                margin-bottom: 20px;
+            }
+        }
+
+        .cardnumber, .bottomThree {
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/global/buttonEffect.css" />
+
+</head>
+<body>
+
+
+    <div class="row">
+        <div class="col-75">
+            <div class="container">
+                <form>
+
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Billing Address</h3>
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input readonly type="text" id="fname" name="firstname">
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input readonly type="text" id="email" name="email">
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input readonly type="text" id="adr" name="address">
+                            <label for="city"><i class="fa fa-institution"></i> City</label>
+                            <input readonly type="text" id="city" name="city">
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="state">State</label>
+                                    <input readonly type="text" id="state" name="state">
+                                </div>
+                                <div class="col-50">
+                                    <label for="zip">Zip</label>
+                                    <input readonly type="text" id="zip" name="zip">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-50">
+                            <h3>Payment</h3>
+                            <label for="fname">Accepted Cards</label>
+                            <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                            <label for="cname">Name on Card</label>
+                            <input type="text" oninvalid="this.setCustomValidity('Cart Holder Name is Required')"
+                                   id="cname" required name="cardname" placeholder="FULL NAME">
+                            <label for="ccnum">Credit card number</label>
+
+                            <div style="display:flex;justify-content:space-between">
+                                <input type="text" oninvalid="this.setCustomValidity('Cart Number is Required')"
+                                       style="flex:0.22" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                       maxlength="4" id="ccnum1" required class="cardnumber" name="cardnumber" placeholder="1111">
+
+                                <input type="text" oninvalid="this.setCustomValidity('Cart Number is Required')"
+                                       style="flex:0.22" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                       maxlength="4" id="ccnum2" required class="cardnumber" name="cardnumber" placeholder="2222">
+
+                                <input type="text" oninvalid="this.setCustomValidity('Cart Number is Required')"
+                                       style="flex:0.22" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                       maxlength="4" id="ccnum3" required class="cardnumber" name="cardnumber" placeholder="3333">
+
+                                <input type="text" oninvalid="this.setCustomValidity('Cart Number is Required')"
+                                       style="flex:0.22" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                       maxlength="4" id="ccnum4" required class="cardnumber" name="cardnumber" placeholder="4444">
+
+                            </div>
+
+                            <div class="row" style="justify-content:space-around">
+                                <div class="" style="flex:0.25">
+                                    <label for="expmonth">Exp Month</label>
+                                    <input type="text" oninvalid="this.setCustomValidity('Cart ExpMonth is Required')"
+                                           required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                           maxlength="3" class="bottomThree" id="expmonth" name="expmonth" placeholder="09">
+                                </div>
+                                <div class="" style="flex:0.25">
+                                    <label for="expyear">Exp Year</label>
+                                    <input type="text" oninvalid="this.setCustomValidity('Cart ExpYear is Required')"
+                                           required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                           maxlength="3" class="bottomThree" id="expyear" name="expyear" placeholder="23">
+                                </div>
+                                <div class="" style="flex:0.25">
+                                    <label for="CVC">CVC</label>
+                                    <input type="text" oninvalid="this.setCustomValidity('Cart CVC is Required')"
+                                           required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                           maxlength="3" class="bottomThree" id="CVC" name="CVC" placeholder="999">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div style="display:flex; justify-content:space-around">
+                        <button type="button" id="cancelBtn" style="flex:0.2" value="" class="btn btn-outline-primary">Cancel </button>
+                        <button type="button" disabled  id="submitBtn" style="flex:0.2" value="" class="btn btn-outline-success">SUBMIT </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="col-25">
+            <div class="container">
+
+                <input hidden id="TotalPrice" />
+                <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/global/CheckLogin.js"></script>
+    <script src="~/js/CheckOut/checkOut.js?3"></script>
+</body>
+</html>
+

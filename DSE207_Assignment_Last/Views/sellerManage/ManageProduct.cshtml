@@ -1,0 +1,492 @@
+﻿@using Syncfusion.EJ2
+
+@using Syncfusion.EJ2.DropDowns;
+
+@{
+    ViewData["Title"] = "ManageProduct";
+    Layout = "~/Views/Shared/Seller/_seller_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/global/AorusFont.css" />
+<link rel="stylesheet" href="~/css/global/buttonEffect.css?2" />
+<style>
+
+    /* pop out*/
+    .custom-model-main {
+        color:white;
+        text-align: center;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; /* z-index: 1050; */
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+        opacity: 0;
+        -webkit-transition: opacity 0.15s linear, z-index 0.15;
+        -o-transition: opacity 0.15s linear, z-index 0.15;
+        transition: opacity 0.15s linear, z-index 0.15;
+        z-index: -1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .model-open {
+        z-index: 99999;
+        opacity: 1;
+        overflow: hidden;
+    }
+
+    .custom-model-inner {
+        color: white;
+        -webkit-transform: translate(0, -25%);
+        -ms-transform: translate(0, -25%);
+        transform: translate(0, -25%);
+        -webkit-transition: -webkit-transform 0.3s ease-out;
+        -o-transition: -o-transform 0.3s ease-out;
+        transition: -webkit-transform 0.3s ease-out;
+        -o-transition: transform 0.3s ease-out;
+        transition: transform 0.3s ease-out;
+        transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+        display: inline-block;
+        vertical-align: middle;
+        width: 600px;
+        margin: 30px auto;
+        max-width: 97%;
+    }
+
+    .custom-model-wrap {
+        display: block;
+        width: 100%;
+        position: relative;
+        background-color: rgba(0,0,0,.8);
+        border: 1px solid #ff6400;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px #ff6400;
+        background-clip: padding-box;
+        outline: 0;
+        text-align: left;
+        padding: 20px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+
+    .model-open .custom-model-inner {
+        -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+        position: relative;
+        z-index: 999;
+    }
+
+    .model-open .bg-overlay {
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 99;
+    }
+
+    .bg-overlay {
+        background: rgba(0, 0, 0, 0);
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        -webkit-transition: background 0.15s linear;
+        -o-transition: background 0.15s linear;
+        transition: background 0.15s linear;
+    }
+
+    .closeSuccess-btn {
+        position: absolute;
+        right: 0;
+        top: -30px;
+        cursor: pointer;
+        z-index: 99;
+        font-size: 30px;
+        color: #fff;
+    }
+
+    .pop-up-content-wrap {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    @@media screen and (min-width:800px) {
+        .custom-model-main:before {
+            content: "";
+            display: inline-block;
+            height: auto;
+            vertical-align: middle;
+            margin-right: -0px;
+            height: 100%;
+        }
+    }
+
+    @@media screen and (max-width:799px) {
+        .custom-model-inner {
+            margin-top: 45px;
+        }
+    }
+
+        table tr:nth-child(odd) {
+            background-color: rgba(218, 218, 218, 0.8)
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(187, 187, 187, 0.8)
+        }
+
+        table tr {
+            transition: .2s ease
+        }
+
+            table tr:not(tr:nth-child(1)):hover {
+                background-color: rgba(100, 100, 100, 0.8);
+                color: #ff6400;
+            }
+
+    tr td:nth-child(1) {
+             flex: 0.4 !important;
+             text-align:center;
+         }
+
+        tr td:nth-child(2) {
+            flex: 1.5 !important;
+        }
+
+        tr td:nth-child(3) {
+            flex: 1 !important;
+        }
+
+        tr td:nth-child(4) {
+            flex: 0.5 !important;
+            justify-content: center;
+        }
+
+        tr td:nth-child(5) {
+            flex: 0.5 !important;
+            justify-content: center;
+        }
+
+        tr td:nth-child(6) {
+            flex: 0.6 !important;
+
+        }
+
+        tr td:nth-child(7) {
+            flex: 1 !important;
+            justify-content: center;
+        }
+
+        tr td:nth-child(8) {
+            flex: 1.5 !important;
+        }
+
+        th {
+            transition: .2s ease
+        }
+
+            th:hover {
+                background-color: rgba(227, 227, 227, 0.6)
+            }
+
+        .StatusCheck {
+        }
+
+
+        #TableDiv {
+            display: flex;
+            height: 580px;
+            width: 100%;
+            overflow: auto;
+            padding: 20px;
+            box-shadow: 1px 2px 2px rgba(0,0,0.2);
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .modal-backdrop{
+            display:none;
+        }
+   
+
+  
+
+</style>
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/List.css" />
+<link rel="stylesheet" href="~/css/global/buttonEffect.css" />
+
+<div style="padding:0px;display:flex;vertical-align:middle">
+    <form action="enhanced-results.html">
+        <div class="row" style="width:200px;">
+            <div class="col-md-10 offset-md-1">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group" style="width:100%">
+                            <select id="filterValue" class="select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                <option value="" disabled>--Search--</option>
+                                <option value="name" selected="">Product Name</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group" style="margin:0px">
+        <div class="input-group input-group-lg">
+            <input type="search" id="filterInput" style="height:38px" class="form-control form-control-lg" placeholder="Type your keywords here" value="">
+            <div class="input-group-append">
+                <button type="submit" style="height:38px;padding:5px 15px" class="btn btn-lg btn-default">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button id="AddNewP" style="height:38px;margin-left:20px;" class="btn btn-outline-primary"> Add New Product</button>
+
+
+    <div class="button-group" style="margin:0px 5px;">
+        <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+            <span class="caret">Category</span>
+        </button>
+        <ul class="dropdown-menu catelist" style="padding:5px">
+            <li>
+                <a class="small" data-value="all" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>All</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" checked />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="motherboards" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Motherboard</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="laptops" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Laptops</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="monitors" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Monitors</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="pcperipherals" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>PC Peripherals</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="pccomponents" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>PC Components</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="graphiccard" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Graphic Card</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="shoes" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Shoes</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="watchs" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Watchs</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="food" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Food</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="clothes" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Clothes</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="button-group" style="margin:0px 5px;">
+        <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+            <span class="caret">Status</span>
+        </button>
+        <ul class="dropdown-menu statuslist" style="padding:5px">
+            <li>
+                <a class="small" data-value="all" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>All</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" checked />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="active" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Active</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+            <li>
+                <a class="small" data-value="disabled" tabIndex="-1" style="display:flex;justify-content:space-between">
+                    <label>Deactive</label>
+                    <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<div id="TableDiv" style="
+        ">
+    <table id="MyTable" style="width:100%">
+        <thead>
+        </thead>
+        <tbody class="products-area-wrapper tableView">
+
+            <tr class="products-header">
+                @*    Columns名字 + Funtioncs*@
+                @*    Filter 功能 Java script*@
+                <th class="product-cell " @*onclick="sortTable(0,165)"*@ style="flex:0.4">
+
+                    <input id="SelectAll" style="width:22px;height:22px" class="product_Select" type="checkbox" />
+
+                    All
+                </th>
+                <th class="product-cell " @*onclick="sortTable(0,165)"*@ style="flex:1.5">
+                    Product Name
+                    @*    <span style="margin-left:10px">
+                    <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                    </span>
+                    *@
+                </th>
+
+                <th class="product-cell " style="flex:1">
+                    Category
+
+
+                </th>
+
+
+
+                <th class="product-cell " onclick="sortTable(3,Number)" style="flex:0.5">
+                    Sales
+                    <span style="margin-left:10px">
+                        <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                    </span>
+                </th>
+
+                <th class="product-cell " onclick="sortTable(4,Number)" style="flex:0.5">
+                    Stock
+                    <span style="margin-left:10px">
+                        <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                    </span>
+                </th>
+
+                <th class="product-cell " onclick="sortTable(5,Number)" style="flex:0.6">
+                    Price
+                    <span style="margin-left:10px">
+                        <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                    </span>
+                </th>
+                <th class="product-cell " onclick="sortTable(6,Number)" style="flex:1">
+                    Last Modifed
+                    <span style="margin-left:10px">
+                        <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                    </span>
+                </th>
+                <th class="product-cell " style="flex:1.5">
+                    Status
+
+                </th>
+
+            </tr>
+
+
+
+        </tbody>
+        <div style="display:none;" class="multiBtnContainer">
+            <div id="MultiBtnDiv" style="display:flex;position:absolute;bottom:40px;right:40px;z-index:2;justify-content:space-between;width:450px">
+                <button class="btn btn-success" id="activeSelectedProduct" style="width:100px;padding:5px 10px">Active</button>
+                <button class="btn btn-warning" id="disabledSelectedProduct" style="width:100px;padding:5px 10px">Disabled</button>
+                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-danger" style="width:100px;padding:5px 10px">Delete</button>
+                <!-- Modal -->
+
+
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="margin-top:15%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">DELETE SELECTED PRODUCT</h5>
+                                <i type="button" class="fa-fa-times"style="font-size:20px" data-bs-dismiss="modal" aria-label="Close"></i>
+                            </div>
+                            <div class="modal-body">
+                                Are you confirm to delete these product?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                                <button type="button" id="deleteSelectedProduct" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </table>
+</div>
+
+
+<div class="custom-model-main ">
+    <div class="custom-model-inner">
+        <div class="closeSuccess-btn">×</div>
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+                Are You Sure To Delete This Product?<br /> <strong id="deleteProductName">Product Name</strong>
+                <br />
+                <button class="DeleteButton btn btn-black">Yes</button>
+
+                <button class="CancelBtn btn btn-orange">No</button>
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</div>
+
+
+<!-- jQuery -->
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/seller/ProductList.js?2"></script>
+<script>
+
+
+</script>

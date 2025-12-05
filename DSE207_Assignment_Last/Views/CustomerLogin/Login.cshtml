@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/Customer/Login_Layout.cshtml";
+}
+
+
+<div class="form" style="margin:130px auto;">
+
+    <ul class="tab-group">
+        <li class="tab active">
+            <button value="#login" class="FormButton">Log In</button>
+        </li>
+        <li class="tab ">
+            <button value="#signup" class="FormButton">Sign Up</button>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="login">
+            <h1>Welcome Back!</h1>
+
+            <form>
+
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Email Address / Phone Number<span class="req">*</span>
+                    </label>
+                    <input id="login_Email" class="Logininput" type="email"  autocomplete="off" />
+                    <span class="title"></span>
+                </div>
+
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Password<span class="req">*</span>
+                    </label>
+                    <input id="login_Password" maxlength="20" class=" Logininput" type="password"  autocomplete="off" />
+                    <span class="title"></span>
+                    <input class="togglePassword" type="checkbox" /> Show Password
+                </div>
+        
+                <p class="forgot">
+                    <a href="/CustomerLogin/ForgotPassword">Forgot Password?</a>
+                </p>
+
+                <button type="button" id="loginBtn" disabled class="button button-block" />Log In</button>
+                <button class="btn btn-black"style="margin-top:10px;"><a href="/sellerLogin/Login">Seller login</a></button>
+                     <button class="btn btn-yellow" style="margin-left:20px;margin-top:10px;"><a href="/Admin/Login">Admin login</a></button>
+
+            </form>
+
+            <div id="errorLogin" style="display:none;">
+                <div class="col-xs-12 mt-3">
+                    <p class="error-mes py-1 px-2">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="signup" style="display:none;">
+            <h1>Sign Up for Free</h1>
+
+            <form >
+
+                @*<div class="top-row">
+                </div>*@
+                <!--email-->
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Email Address<span class="req">*</span>
+                    </label>
+                    <!-- Show and title active -->
+                    <input class="Logininput" id="regis_Email" type="email" required autocomplete="off" />
+                    <span class="title "></span>
+                    <span class="mes" style="color:#ff6400;">The email will be your login ID of MIAODATA Account.</span>
+                </div>
+                <!--nickname-->
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Nick Name<span class="req">*</span>
+                    </label>
+                    <input class="Logininput" id="regis_NickName" maxlength="30" type="text" required autocomplete="off" />
+                    <span class="title"></span>
+                    <span style="color:#ff6400;">Nickname must be within 30 characters.</span>
+
+                </div>
+                <!--password-->
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Password<span class="req">*</span>
+                    </label>
+                    <input class="Logininput" maxlength="20" id="regis_Password" type="password" required autocomplete="off" />
+                    <span class="title"></span>
+
+                    <span class="mes" style="color:#ff6400;">
+                        Password must be 8 to 20 characters,
+                        with a least one numeric character [0-9] and one letter.
+                        Space is not allowed.
+                    </span>
+                    <input class="togglePassword" type="checkbox" /> Show Password
+
+                </div>
+                <!--re-enterpassword -->
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Re-enter password<span class="req">*</span>
+                    </label>
+                    <input class="Logininput" id="regis_re-Password" type="password" required autocomplete="off" />
+                    <span class="title"></span>
+                    <span class="mes" style="color:#ff6400;">
+                        Passwords must match.
+                    </span>
+                    <input class="togglePassword" type="checkbox" /> Show Re-enter password
+
+                </div>
+                <!--phone Number -->
+                <div class="field-wrap">
+                    <label class="Loginlabel">
+                        Phone Number<span class="req">*</span>
+                    </label>
+
+                    <input class="Logininput" id="regis_Phone" type="text" required autocomplete="off" />
+                    <span class="title "></span>
+                    <button class="btn btn-black" style="margin-top:10px;margin-right:10px" id="regis_GetotpBtn" disabled type="button">Get OTP</button>
+
+                    <span class="mes" style="color:#ff6400;">Phone number only support Malaysia format</span>
+                </div>
+
+                <div class="field-wrap" style="display:none;">
+                    <label class="Loginlabel">
+                        Otp Password <span class="req">*</span>
+                    </label>
+                    <!-- Show and title active -->
+                    <input class="Logininput" id="regis_Enterotp" type="text" required autocomplete="off" />
+                    <span class="title"></span>
+                    <button style="margin-top:10px" class="btn btn-black" disabled id="regis_EnterOTP" type="button">Enter OTP</button>
+
+                    <span class="mes" style="color:#ff6400;"></span>
+
+                    <div>
+                        <button class="btn btn-black" style="margin-top:10px" type="button" id="regis_TryAnother"> Try another phone number</button>
+                    </div>
+
+                </div>
+
+            </form>
+            <button id="registerBtn" disabled class="button button-block" />Get Started</button>
+
+            <div id="errorRegister" style="display:none;">
+                <div class="col-xs-12 mt-3">
+                    <div class="error-mes py-1 px-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div><!-- tab-content -->
+
+</div> <!-- /form -->
+<div class="custom-model-main ">
+    <div class="custom-model-inner">
+        <div class="closeSuccess-btn">×</div>
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+                Register Success!<br /> Close this window back to login
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</div>
+
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+    <script src="~/js/customer/Login.js"></script>
+
+<script>
+
+    $(function () {
+        $('html, body').animate({
+            scrollTop: $('.form').offset().top - 120
+        }, 'slow');
+    })
+
+
+</script>

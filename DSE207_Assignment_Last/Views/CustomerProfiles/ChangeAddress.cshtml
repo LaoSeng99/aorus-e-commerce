@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewData["Title"] = "ChangeAddress";
+    Layout = "~/Views/Shared/Customer/Profiles_Layout.cshtml";
+}
+
+
+<div class="col-xs-12  col-md-8" style="padding-bottom:150px;margin-left:auto;margin-right:auto">
+    <div class="col-xs-12">
+
+        <div class="h1 page-title text-center mt-5 mb-2">Shipping Address</div>
+    </div>
+    <div id="addressDetail" class="row">
+
+        <div class="col-xs-12 col-sm-12 aorus-input float-left">
+            <input type="text" class="form-control" placeholder="" value="" id="Address_Line1" maxlength="64">
+
+            <span class="title">Address Line 1*</span>
+        </div>
+        <div class="col-xs-12 col-sm-12 aorus-input float-left">
+            <input type="text" class="form-control" placeholder="" value="" id="Address_Line2" maxlength="64">
+
+            <span class="title">Address Line 2 (Optional)</span>
+        </div>
+
+        <!-- <div class="col-xs-12 col-sm-12 aorus-input">
+            <input type="text" class="form-control" placeholder="" value="" id="Address_Line3">
+            <span class="title">member_ui.AddressLine3</span>
+
+        </div> -->
+        <div class="col-xs-12 col-sm-12 col-lg-4 aorus-input float-left">
+
+            <input type="text" class="form-control" value="" id="Address_City" maxlength="64">
+
+            <span class="title">City*</span>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4  aorus-input float-left">
+
+            <input type="text" class="form-control" value="" id="Address_State" maxlength="64">
+
+            <span class="title">State/Province*</span>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 aorus-input float-left">
+
+            <input type="text" class="form-control" value="" id="Address_PostCode" maxlength="32">
+
+            <span class="title">Zip Code/Post Code*</span>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 aorus-input float-left">
+         
+                <input type="text" class="form-control" readonly id="country" value="" disabled=""><span class="title" id="locale-area">Country/Region</span>
+       
+            <span class="title">Country/Region*</span>
+        </div>
+        <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 aorus-input">
+            <div class="select-arrow">
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <select name="" id="" class="form-control">
+                <option value=""></option>
+                <option value=""></option>
+            </select>
+            <span class="title">Country Code</span>
+        </div> -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4   aorus-input float-left">
+
+            <input type="text" class="form-control" value="" id="Address_Phone" disabled="" maxlength="32">
+
+            <span class="title">Phone Number*</span>
+        </div>
+
+
+
+        <!-- <div class="col-xs-12 aorus-input">
+            <input type="text" class="form-contol" id="" value="">
+            <span class="title">Contact Email</span>
+
+        </div> -->
+        <div id="errorAddress" style="display:none;">
+            <div class="col-xs-12 mt-3">
+                <div class="error-mes py-1 px-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 mt-2 text-center">
+
+            <button class="btn btn-orange px-5 save-btn" id="addressSave">Save</button>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/customer/ChangeAddress.js?1"></script>
+<script src="~/js/customer/customerInputCheck.js"></script>
+
+<script>
+    $(function () {
+        $('html, body').animate({
+            scrollTop: $("#addressDetail").offset().top - 100
+        }, 'slow');
+
+    })
+</script>

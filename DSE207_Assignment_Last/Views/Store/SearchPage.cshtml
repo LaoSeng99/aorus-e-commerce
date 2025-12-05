@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "SearchPage";
+    Layout = "~/Views/Shared/Store/SearchPage_Layout.cshtml";
+}
+
+
+<div style="background: rgb(46, 46, 46); position: relative;">
+    <div class="aorus-container p-0">
+        <div style="position: relative; width: 100%;">
+
+            <div data-v-5e0c66e7="" style="width:100%" id="product-list-div" class="product-list-div">
+                <!--Mobile View-->
+                <div data-v-5e0c66e7="" class="container-fluid">
+
+
+                    <div data-v-5e0c66e7="" id="Product-Container" class="row">
+
+                        <div data-v-5e0c66e7="" class="col-12 text-center mb-3">
+                            <h1 id="noresult"> Searh : <input style="background-color:transparent;color:white" id="SearchPageInput" /></h1>  <!---->
+                        </div>
+                        <!-- Foreach Product -->
+
+                    </div>
+                    <div data-v-5e0c66e7="" class="row productAnime" style="display: none;">
+                        @for (int i = 0; i < 8; i++)
+                        {
+                            <div data-v-5e0c66e7="" style="max-width:25%" class="col-product">
+                                <div data-v-5e0c66e7="" class="productBoxAnime">   </div>
+                            </div>
+
+                        }
+                    </div>
+                    <div data-v-5e0c66e7="" class="row" style="">
+                        <div data-v-5e0c66e7="" class="col-12 text-right">
+                            <button data-v-5e0c66e7="" disabled="disabled" class="pageBtn first"> First </button>
+                            <button data-v-5e0c66e7="" disabled="disabled" class="pageBtn previous"> Previous </button>
+
+                            <button data-v-5e0c66e7="" class="pageBtn next"> Next </button>
+                            <button data-v-5e0c66e7="" class="pageBtn last"> Last </button>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+            </div>
+
+        </div>
+    </div>
+
+    <!---->
+</div>
+
+<div class="custom-model-main ">
+    <div class="custom-model-inner">
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+                has reach the quantity limit!
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</div>
+
+<div class=" Noproduct-model">
+    <div class="custom-model-inner">
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+                No Result, Try another keyword
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlayNo"></div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script src="~/js/store/Store_SearchPage.js?1"></script>

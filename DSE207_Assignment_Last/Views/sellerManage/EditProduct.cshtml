@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewData["Title"] = "EditProduct";
+    Layout = "~/Views/Shared/Seller/_seller_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+
+<link rel="stylesheet" href="~/css/_seller/sellerCreateProduct.css" />
+<link rel="stylesheet" href="~/css/global/AorusFont.css" />
+<link rel="stylesheet" href="~/css/global/ButtonAnimated.css" />
+
+<style>
+    .errorMsg {
+        color: red;
+        font-size: 16px;
+    }
+</style>
+
+
+<div id="ProductCreate" style="padding:0px 25px 25px 25px;">
+    <a href="/Seller_Manage/Products_List" style="font-size:20px;"> Back To Product List</a>
+    <div class="row">
+
+        <div class="col-8">
+            <label class="col-form-label">
+                Product Name
+            </label>
+
+            <input id="pdName" maxlength="30" type="text" class="form-control" placeholder="Enter ...">
+            <span style="display:none" class='errorMsg'></span>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-8">
+            <label class="col-form-label">
+                Product Title (Optional)
+            </label>
+
+            <input type="text" maxlength="30" id="pdtitle" class="form-control" placeholder="Enter ...">
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-3">
+            <label class="col-form-label">
+                Category
+            </label>
+
+            <select id="pdCategory" class="form-control">
+                <option value="">-- select --</option>
+        
+            </select>
+            <span style="display:none" class='errorMsg'></span>
+        </div>
+        <div class="col-3">
+            <label class="col-form-label">
+                Tag
+            </label>
+            <i title="If tag more than two, please separation with ','" class='fas fa-exclamation-circle' style='font-size:16px'></i>
+            <input id="pdTag" type="text" class="form-control" placeholder="Enter ...">
+            <span style="display:none" class='errorMsg'></span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label">
+            Description
+        </label>
+
+        <textarea id="inp_editor1">
+             &lt;p&gt;Initial Document Content&lt;/p&gt; 
+             </textarea>
+        <span style="display:none" class='errorMsg'>Description have to at least 100 characters</span>
+    </div>
+    <div class="row">
+
+        <div class="col-3">
+            <label class="col-form-label">
+                Pricing(RM)
+            </label>
+            <input id="pdPrice"
+                   onchange="javascript: if (this.value =='' ) this.value =0.01"
+                   type="text" class="form-control" placeholder="Enter ...">
+            <span style="display:none" class='errorMsg'></span>
+        </div>
+        <div class="col-3">
+            <label class="col-form-label">
+                Discount(%)
+            </label>
+            <input id="pdDiscount"
+                   onchange="javascript: if (this.value =='' ) this.value =0"
+                   type="text" class="form-control" placeholder="Enter ...">
+            <span style="display:none" class='errorMsg'></span>
+        </div>
+        <div class="col-3">
+            <label class="col-form-label">
+                Stock
+            </label>
+            <input id="pdStock"
+                   onchange="javascript: if (this.value ==0 ) this.value =1"
+                   type="text" class="form-control" placeholder="Enter ...">
+            <span style="display:none" class='errorMsg'></span>
+        </div>
+    </div>
+
+    <button id="ToPreview" class="custom-btn btn-3">
+        <span>To Save & Preview>></span>
+    </button>
+
+</div>
+
+
+<div id="ProductPreview" style="height:auto;display:none;padding:20px;">
+    <button id="ToCreate" class="custom-btn btn-7">
+        <span>Back to Edit Product</span>
+    </button>
+    <button class="custom-btn btn-7 SaveBtn">
+        <span>Save Changes</span>
+    </button>
+
+    <h1 style="text-align:center" class="fontAorus">A SIMPLE PREVIEW <br />(!NOT FINAL VIEW OF CUSTOMER)</h1>
+    <div class="row fontContent" style="height:inherit;padding-bottom:150px">
+
+        <div class="col-1 randomBackColor" style="max-width:none;">
+            <h2 id="previewName" class="fontAorus">
+            </h2>
+            <h3 id="previewTitle" class="fontAldrich">
+            </h3>
+            <h4 class="fontAldrich">
+            </h4>
+
+
+            <h4 class="discountPrice fontAorus">
+                RM  <del id="previewOriginal"></del>
+                <span style="color:red" id="previewDiscount"></span>%
+            </h4>
+
+            <h4 id="preview" class="afterDisPrice fontAorus"></h4>
+
+
+            <span>
+                ** Click Image To Remove **
+
+            </span>
+            <div id="productImage" style="width:500px">
+
+                <label for="file-upload" class="addImageButton">
+                    <i class="fa fa-plus" style="font-size:36px;position:relative;top:13px;"></i>
+
+                </label>
+
+                <input style="display:none;" id="file-upload" type="file" />
+
+                @*        <img class="slide" width="120" src="https://www.gigabyte.com/Image/36aec8d11789f50ccb892e836dce3467/Product/32044/webp/1000" />
+                <img class="slide" width="120" src="https://www.gigabyte.com/Image/844e3f5694d3c6f22f9bbc6ac2061e00/Product/32040/webp/1000" />
+                <img class="slide" width="120" src="https://www.nintendo.com/sg/switch/scarlet_violet/img/scarletpkg.png" />
+                <img class="slide" width="120" src="https://www.gigabyte.com/Image/cd78b6c504af46e50386e614bc8d7a26/Product/32835/webp/1000" />
+                <img class="slide" width="120" src="https://www.gigabyte.com/Image/cd78b6c504af46e50386e614bc8d7a26/Product/32835/webp/1000" />
+                <img class="slide" width="120" src="https://www.gigabyte.com/Image/cd78b6c504af46e50386e614bc8d7a26/Product/32835/webp/1000" />
+                *@
+            </div>
+
+            <span>
+                * The ImageSize cannot be large than 3MB
+
+            </span>
+
+
+
+
+        </div>
+        <div class="col-2" style="max-width:52%;">
+
+            <img lazy="loaded" style="display:none;" id="BigShowImage" height="500" src="" class="controller" />
+            <div class="color-box randomBackColor"></div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="SecondBar">
+            <ul>
+                <!-- DESCRIPTION -->
+                <li>
+                    <button id="ShowDescription">
+                        <span>Description</span>
+                    </button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div id="previewDescription"></div>
+</div>
+
+<div class="custom-model-main ">
+    <div class="custom-model-inner">
+        <div class="closeSuccess-btn">×</div>
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+                Save Change Success!<br /> Close this window back to ProductList
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</div>
+
+
+
+
+
+
+<script src="~/ExternalSide/Dashboard/plugins/jquery/jquery.min.js"></script>
+<script src="~/js/seller/CreateProduct.js?4"></script>
+
+<script type="text/javascript" src="/richtexteditor/rte.js"></script>
+<script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
+<script>
+    var editor1 = new RichTextEditor("#inp_editor1");
+            //editor1.setHTMLCode("Use inline HTML or setHTMLCode to init the default content.");
+
+
+</script>

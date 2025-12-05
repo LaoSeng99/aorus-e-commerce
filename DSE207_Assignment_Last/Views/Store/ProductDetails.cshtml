@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "ProductDetails";
+    Layout = "~/Views/Shared/Store/ProductDetails_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/_store/Store_Product_Details.css" />
+<style>
+      input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<div style="min-height:800px">
+
+
+    <div id="productDetails" style="display:none;">
+        <div class="Detailsrow fontContent">
+
+            <div class="col-1 " style="flex-basis:45%;">
+                <h2 class="fontAorus"></h2>
+                <h3 style="color:ghostwhite" class="fontAldrich"></h3>
+
+
+
+                <h4 class="discountPrice fontAorus">   <del id="Disprice"></del>
+                    <span style="color:red" id="Discount"></span></h4>
+
+                <h4 class="afterDisPrice fontAorus"></h4>
+                <h4 class="remainStock fontAorus">
+                    Remaining Stock:
+                
+                </h4>
+
+
+
+                <!-- Minus button -->
+                <i style="margin-left:5px;font-size:30px" class="qtyBtn fa fa-minus DetailsMinus"></i>
+                <!-- this cart row quantity -->
+                <input oninput="javascript: if (this.value <0) this.value =1;" type="number" 
+                id="detailsInputQty"
+                style="font-size:24px;height:36px;margin:10px;text-align:center;background-color:transparent;width:100px;color:white" class="fontContent" value="1" />
+                <!-- Plus button -->
+                <i style="font-size:30px" class=" qtyBtn fa fa-plus DetailsPlus"></i>
+                <button id="addToCart" style="margin-left:10px;font-size:20px;font-weight:300" class="btn btn-black fontAorus"> Login To Purchase</button>
+                <br />
+                <span id="ErrorMsg" style="font-size:20px;color:red;margin-left:20px;display:none;"></span>
+
+
+                <div id="productImage" style="width:550px;">
+                    <img style="display:none;" class="slide" height="160" width="160" src="" />
+                    <img style="display:none;" class="slide" height="160" width="160" src="" />
+                    <img style="display:none;" class="slide" height="160" width="160" src="" />
+                    <img style="display:none;" class="slide" height="160" width="160" src="" />
+                    <img style="display:none;" class="slide" height="160" width="160" src="" />
+                    <img style="display:none;" class="slide" height="160" width="160" src="" />
+
+
+                </div>
+
+            </div>
+            <div class="col-2">
+
+                <img id="BigShowImage" height="800" src="" class="controller" />
+
+                <div class="color-box randomBackColor"></div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="SecondBar">
+                <ul>
+                    <!-- DESCRIPTION -->
+                    <li>
+                        <button id="ShowDescription">
+                            <span style="font-size:24px">Description</span>
+                        </button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div style="background-color:rgba(0,0,0,.2);display:flex">
+
+            <div id="Description" style="margin-left:auto;margin-right:auto">
+            </div>
+        </div>
+
+    </div>
+    <section data-v-eb150444="" class="aorus-container mb-5 fontContent" style="margin-bottom:0px !important;background-color:rgba(0,0,0,.35)">
+        <div data-v-eb150444=""class="template-left-title template-left-title-show">
+            Random Daily Choice
+        </div>
+        <div data-v-eb150444="" class="row">
+            <div data-v-eb150444="" class="col-12 text-center">
+                <div data-v-eb150444="" style="margin-top:40px;" class="template-title">
+                    <h1 data-v-eb150444="" class="fontAldrich">
+                        Random Daily Choice
+                    </h1>
+                </div>
+
+            </div>
+            <div data-v-eb150444=""style="display:flex;justify-content:end;padding-right:20px;padding-bottom:20px" class="col-12 product-line-div">
+        
+                            <div id="BestFour" style="display:flex">
+                            </div>
+
+
+                            <!--End of Slick Product List-->
+
+                       
+         
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="custom-model-main ">
+    <div class="custom-model-inner">
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+                has reach the quantity limit!
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/store/Store_Product_Details.js?3"></script>
+
+
+<script>
+    $(function () {
+        $('html, body').animate({
+            scrollTop: $("#sec-542c").offset().top
+        }, 'slow');
+    })
+</script>

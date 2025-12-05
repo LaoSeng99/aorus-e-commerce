@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/global/buttonEffect.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/_customer/CustomerLogin.css" />
+    <style>
+
+    </style>
+</head>
+<body style="overflow-x:hidden">
+    <!-- Most of design, html and css come from https://www.aorus.com/en-my  -->
+    <!--  Only for self-study, no commercial use  -->
+    <div class="loading-div active show" id="loading-div">
+        <div>
+            <span> </span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <button id="backToTop" class="back-to-top ">
+        <i class="arrow"></i>
+        <i class="arrow"></i>
+    </button>
+
+    <div data-v-ecfbc8e2="" class="aorus-header aorus-index-othercolor notFixed">
+        <div data-v-ecfbc8e2="" class="aorus-container">
+            <div data-v-ecfbc8e2="" class="">
+                <div data-v-ecfbc8e2="" class="col-12 flex-container">
+                    <div data-v-ecfbc8e2="" class="header-box">
+                        <span data-v-ecfbc8e2="" id="menuBtn">
+                            <i data-v-ecfbc8e2="" style="font-size:28px;" class=" fa fa-bars"></i>
+                        </span>
+                        <a data-v-ecfbc8e2="" href="~/Store/Home" class="GA-menu-link">
+
+                            <svg data-v-ecfbc8e2="" class="logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="currentColor" d="M507.606 371.054a187.217 187.217 0 00-23.051-19.606c-17.316 19.999-37.648 36.808-60.572 50.041-35.508 20.505-75.893 31.452-116.875 31.711 21.762 8.776 45.224 13.38 69.396 13.38 49.524 0 96.084-19.286 131.103-54.305a15 15 0 004.394-10.606 15.028 15.028 0 00-4.395-10.615zM27.445 351.448a187.392 187.392 0 00-23.051 19.606C1.581 373.868 0 377.691 0 381.669s1.581 7.793 4.394 10.606c35.019 35.019 81.579 54.305 131.103 54.305 24.172 0 47.634-4.604 69.396-13.38-40.985-.259-81.367-11.206-116.879-31.713-22.922-13.231-43.254-30.04-60.569-50.039zM103.015 375.508c24.937 14.4 53.928 24.056 84.837 26.854-53.409-29.561-82.274-70.602-95.861-94.135-14.942-25.878-25.041-53.917-30.063-83.421-14.921.64-29.775 2.868-44.227 6.709-6.6 1.576-11.507 7.517-11.507 14.599 0 1.312.172 2.618.512 3.885 15.32 57.142 52.726 100.35 96.309 125.509zM324.148 402.362c30.908-2.799 59.9-12.454 84.837-26.854 43.583-25.159 80.989-68.367 96.31-125.508.34-1.267.512-2.573.512-3.885 0-7.082-4.907-13.023-11.507-14.599-14.452-3.841-29.306-6.07-44.227-6.709-5.022 29.504-15.121 57.543-30.063 83.421-13.588 23.533-42.419 64.554-95.862 94.134zM187.301 366.948c-15.157-24.483-38.696-71.48-38.696-135.903 0-32.646 6.043-64.401 17.945-94.529-16.394-9.351-33.972-16.623-52.273-21.525-8.004-2.142-16.225 2.604-18.37 10.605-16.372 61.078-4.825 121.063 22.064 167.631 16.325 28.275 39.769 54.111 69.33 73.721zM324.684 366.957c29.568-19.611 53.017-45.451 69.344-73.73 26.889-46.569 38.436-106.553 22.064-167.631-2.145-8.001-10.366-12.748-18.37-10.605-18.304 4.902-35.883 12.176-52.279 21.529 11.9 30.126 17.943 61.88 17.943 94.525.001 64.478-23.58 111.488-38.702 135.912zM266.606 69.813c-2.813-2.813-6.637-4.394-10.615-4.394a15 15 0 00-10.606 4.394c-39.289 39.289-66.78 96.005-66.78 161.231 0 65.256 27.522 121.974 66.78 161.231 2.813 2.813 6.637 4.394 10.615 4.394s7.793-1.581 10.606-4.394c39.248-39.247 66.78-95.96 66.78-161.231.001-65.256-27.511-121.964-66.78-161.231z" />
+                            </svg>
+
+                            <span data-v-78b326c3="" data-text="MiaoDaTa" class="header-slogan  slogan  ">
+                                <span>MiaoDaTa <br /> Gaming Store</span>
+
+                            </span>
+                        </a>
+                        <ul data-v-ecfbc8e2="" class="menuInit show">
+                            <!--================== Mobile Size ================-->
+                            <div data-v-ecfbc8e2="" class="menuHeader">
+                                <div data-v-ecfbc8e2="" id="closeSideBar" class="closeMenuBtn">
+                                    <i data-v-ecfbc8e2="" style="font-size:28px;" class="fa fa-times"></i>
+                                </div>
+                                <div data-v-2158a69f="" data-v-ecfbc8e2="" id="Search-div" class="search-div menuSearch searchDivType-mb">
+                                    <div data-v-2158a69f="" class="aorus-container">
+                                        <div data-v-2158a69f="" class="row">
+                                            <div data-v-2158a69f="" class="col-12">
+                                                <div data-v-2158a69f="" class=" search-flex-container">
+                                                    <div data-v-2158a69f="" class="search-flex-box search-flex-box-logo">
+                                                        <a data-v-2158a69f="" href="~/Store/Home">
+                                                            <svg data-v-ecfbc8e2="" class="logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="currentColor" d="M507.606 371.054a187.217 187.217 0 00-23.051-19.606c-17.316 19.999-37.648 36.808-60.572 50.041-35.508 20.505-75.893 31.452-116.875 31.711 21.762 8.776 45.224 13.38 69.396 13.38 49.524 0 96.084-19.286 131.103-54.305a15 15 0 004.394-10.606 15.028 15.028 0 00-4.395-10.615zM27.445 351.448a187.392 187.392 0 00-23.051 19.606C1.581 373.868 0 377.691 0 381.669s1.581 7.793 4.394 10.606c35.019 35.019 81.579 54.305 131.103 54.305 24.172 0 47.634-4.604 69.396-13.38-40.985-.259-81.367-11.206-116.879-31.713-22.922-13.231-43.254-30.04-60.569-50.039zM103.015 375.508c24.937 14.4 53.928 24.056 84.837 26.854-53.409-29.561-82.274-70.602-95.861-94.135-14.942-25.878-25.041-53.917-30.063-83.421-14.921.64-29.775 2.868-44.227 6.709-6.6 1.576-11.507 7.517-11.507 14.599 0 1.312.172 2.618.512 3.885 15.32 57.142 52.726 100.35 96.309 125.509zM324.148 402.362c30.908-2.799 59.9-12.454 84.837-26.854 43.583-25.159 80.989-68.367 96.31-125.508.34-1.267.512-2.573.512-3.885 0-7.082-4.907-13.023-11.507-14.599-14.452-3.841-29.306-6.07-44.227-6.709-5.022 29.504-15.121 57.543-30.063 83.421-13.588 23.533-42.419 64.554-95.862 94.134zM187.301 366.948c-15.157-24.483-38.696-71.48-38.696-135.903 0-32.646 6.043-64.401 17.945-94.529-16.394-9.351-33.972-16.623-52.273-21.525-8.004-2.142-16.225 2.604-18.37 10.605-16.372 61.078-4.825 121.063 22.064 167.631 16.325 28.275 39.769 54.111 69.33 73.721zM324.684 366.957c29.568-19.611 53.017-45.451 69.344-73.73 26.889-46.569 38.436-106.553 22.064-167.631-2.145-8.001-10.366-12.748-18.37-10.605-18.304 4.902-35.883 12.176-52.279 21.529 11.9 30.126 17.943 61.88 17.943 94.525.001 64.478-23.58 111.488-38.702 135.912zM266.606 69.813c-2.813-2.813-6.637-4.394-10.615-4.394a15 15 0 00-10.606 4.394c-39.289 39.289-66.78 96.005-66.78 161.231 0 65.256 27.522 121.974 66.78 161.231 2.813 2.813 6.637 4.394 10.615 4.394s7.793-1.581 10.606-4.394c39.248-39.247 66.78-95.96 66.78-161.231.001-65.256-27.511-121.964-66.78-161.231z" />
+                                                            </svg>
+
+
+                                                        </a>
+                                                        <!---->
+                                                    </div>
+                                                    <div data-v-2158a69f="" class="search-flex-box">
+                                                        <input data-v-2158a69f="" type="text" placeholder="Search" class="searchInput">
+                                                        <span data-v-2158a69f="" id="search-icon" class="ClickToSearch" style="color: rgb(102, 102, 102); cursor: not-allowed;">
+                                                            <i data-v-2158a69f="" style="font-size:28px;" class="fa fa-search"></i>
+                                                        </span>
+                                                        <!--============ Close Button ==========-->
+                                                        <div data-v-2158a69f="" class="closeSearchBtn"></div>
+
+                                                        <div data-v-2158a69f="" class="history-div" style="display: none;">
+                                                            <div data-v-2158a69f="">
+                                                                <div data-v-2158a69f="" class="title">Recent Searches</div>
+                                                       
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <li data-v-ecfbc8e2 class="menu-list fontAldrich Product-Menu">
+                                Aorus Gaming
+                                <i data-v-ecfbc8e2="" class="fa fa-angle-down"></i>
+                                <div data-v-ecfbc8e2="" id="product-submenu" class="submenu-div fontContent">
+                                    <div data-v-ecfbc8e2="" class="aorus-container">
+                                        <div data-v-ecfbc8e2="" class="row">
+                                            <div data-v-ecfbc8e2="" class="col-12 submenuPadding">
+                                                <div data-v-ecfbc8e2="" class="submenu-content">
+                                                    <div data-v-ecfbc8e2="">
+                                                        <a data-v-ecfbc8e2="" href="/ProductList?category=motherboards" class="GA-menu-link">
+                                                            <img data-v-ecfbc8e2="" src="~/Image/StoreOriImage/Motherboard.6b87c3cf.png.webp" alt="" height="135" width="122">
+                                                            <div data-v-ecfbc8e2="" class="title">MOTHERBOARDS</div>
+                                                        </a>
+                                                    </div>
+                                                    <div data-v-ecfbc8e2="">
+                                                        <a data-v-ecfbc8e2="" href="/ProductList?category=graphic card" class="GA-menu-link">
+                                                            <img data-v-ecfbc8e2="" src="~/Image/StoreOriImage/Graphics.8b61a0c9.png.webp" alt="" height="135" width="122">
+                                                            <div data-v-ecfbc8e2="" class="title">GRAPHICS CARDS</div>
+                                                        </a>
+                                                    </div>
+                                                    <div data-v-ecfbc8e2="">
+                                                        <a data-v-ecfbc8e2="" href="/ProductList?category=laptops" class="GA-menu-link">
+                                                            <img data-v-ecfbc8e2="" src="~/Image/StoreOriImage/Laptop.5a05a29f.png.webp" alt="" height="135" width="122">
+                                                            <div data-v-ecfbc8e2="" class="title">LAPTOPS</div>
+                                                        </a>
+                                                    </div>
+                                                    <div data-v-ecfbc8e2="">
+                                                        <a data-v-ecfbc8e2="" href="/ProductList?category=monitors" class="GA-menu-link">
+                                                            <img data-v-ecfbc8e2="" src="~/Image/StoreOriImage/Monitor.2ec4422a.png.webp" alt="" height="135" width="122">
+                                                            <div data-v-ecfbc8e2="" class="title">MONITORS</div>
+                                                        </a>
+                                                    </div>
+
+                                                    <div data-v-ecfbc8e2="">
+                                                        <a data-v-ecfbc8e2="" href="/ProductList?category=pc components" class="GA-menu-link">
+                                                            <img data-v-ecfbc8e2="" src="~/Image/StoreOriImage/Components.15962053.png.webp" alt="" height="135" width="122">
+                                                            <div data-v-ecfbc8e2="" class="title">PC COMPONENTS</div>
+                                                        </a>
+
+                                                    </div>
+                                                    <div data-v-ecfbc8e2="">
+                                                        <a data-v-ecfbc8e2="" href="/ProductList?category=pc peripherals" class="GA-menu-link">
+                                                            <img data-v-ecfbc8e2="" src="~/Image/StoreOriImage/Peripherals.77068125.png.webp" alt="" height="135" width="122">
+                                                            <div data-v-ecfbc8e2="" class="title">PC PERIPHERALS</div>
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li data-v-ecfbc8e2="" class="menu-list fontAldrich">
+                                Members Store
+                                <i data-v-ecfbc8e2="" class="fa fa-angle-down"></i>
+                                <div data-v-ecfbc8e2="" class="submenu-list fontContent">
+                                    <!-- Loop All Products -->
+
+
+                                    <div data-v-ecfbc8e2="">
+                                        <a data-v-ecfbc8e2="" href="/ProductList?category=clothes" class="GA-menu-link">
+                                            Clothes
+                                        </a>
+                                    </div>
+                                    <div data-v-ecfbc8e2="">
+                                        <a data-v-ecfbc8e2="" href="/ProductList?category=food" class="GA-menu-link">
+                                            Food
+                                        </a>
+                                    </div>
+                                    <div data-v-ecfbc8e2="">
+                                        <a data-v-ecfbc8e2="" href="/ProductList?category=watchs" class="GA-menu-link">
+                                            Watchs
+                                        </a>
+                                    </div>
+                                    <div data-v-ecfbc8e2="">
+                                        <a data-v-ecfbc8e2="" href="/ProductList?category=shoes" class="GA-menu-link">
+                                            Shoes
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-v-ecfbc8e2="" class="header-box">
+                        <span data-v-ecfbc8e2="" id="search-icon" class="search-icon_Pc">
+
+
+                            <i data-v-ecfbc8e2="" style="font-size:28px;" class="fa fa-search"></i>
+                        </span>
+
+                        <span data-v-ecfbc8e2="" id="user-icon">
+
+                            <a data-v-ecfbc8e2="" href="~/CustomerLogin/Login" class="userLink GA-menu-link">
+                                <i data-v-ecfbc8e2="" style="font-size:30px;" class="fa fa-user"></i>
+                            </a>
+
+
+
+                        </span>
+                        <span data-v-ecfbc8e2="" style="display:none" class="logoutIcon" id="user-icon">
+
+                            <a data-v-ecfbc8e2="" href="~/Member/Logout" class="userLink GA-menu-link">
+                                <i class="fa fa-sign-out" style="font-size:30px"></i>
+                            </a>
+
+
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-v-2158a69f="" data-v-ecfbc8e2="" id="TopSearch" class="search-div">
+            <div data-v-2158a69f="" class="aorus-container">
+                <div data-v-2158a69f="" class="row">
+                    <div data-v-2158a69f="" class="col-12">
+                        <div data-v-2158a69f="" class=" search-flex-container">
+                            <div data-v-2158a69f="" class="search-flex-box search-flex-box-logo">
+                                <a data-v-2158a69f="" href="~/Store/Home">
+                                    <svg data-v-ecfbc8e2="" class="logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="white" d="M507.606 371.054a187.217 187.217 0 00-23.051-19.606c-17.316 19.999-37.648 36.808-60.572 50.041-35.508 20.505-75.893 31.452-116.875 31.711 21.762 8.776 45.224 13.38 69.396 13.38 49.524 0 96.084-19.286 131.103-54.305a15 15 0 004.394-10.606 15.028 15.028 0 00-4.395-10.615zM27.445 351.448a187.392 187.392 0 00-23.051 19.606C1.581 373.868 0 377.691 0 381.669s1.581 7.793 4.394 10.606c35.019 35.019 81.579 54.305 131.103 54.305 24.172 0 47.634-4.604 69.396-13.38-40.985-.259-81.367-11.206-116.879-31.713-22.922-13.231-43.254-30.04-60.569-50.039zM103.015 375.508c24.937 14.4 53.928 24.056 84.837 26.854-53.409-29.561-82.274-70.602-95.861-94.135-14.942-25.878-25.041-53.917-30.063-83.421-14.921.64-29.775 2.868-44.227 6.709-6.6 1.576-11.507 7.517-11.507 14.599 0 1.312.172 2.618.512 3.885 15.32 57.142 52.726 100.35 96.309 125.509zM324.148 402.362c30.908-2.799 59.9-12.454 84.837-26.854 43.583-25.159 80.989-68.367 96.31-125.508.34-1.267.512-2.573.512-3.885 0-7.082-4.907-13.023-11.507-14.599-14.452-3.841-29.306-6.07-44.227-6.709-5.022 29.504-15.121 57.543-30.063 83.421-13.588 23.533-42.419 64.554-95.862 94.134zM187.301 366.948c-15.157-24.483-38.696-71.48-38.696-135.903 0-32.646 6.043-64.401 17.945-94.529-16.394-9.351-33.972-16.623-52.273-21.525-8.004-2.142-16.225 2.604-18.37 10.605-16.372 61.078-4.825 121.063 22.064 167.631 16.325 28.275 39.769 54.111 69.33 73.721zM324.684 366.957c29.568-19.611 53.017-45.451 69.344-73.73 26.889-46.569 38.436-106.553 22.064-167.631-2.145-8.001-10.366-12.748-18.37-10.605-18.304 4.902-35.883 12.176-52.279 21.529 11.9 30.126 17.943 61.88 17.943 94.525.001 64.478-23.58 111.488-38.702 135.912zM266.606 69.813c-2.813-2.813-6.637-4.394-10.615-4.394a15 15 0 00-10.606 4.394c-39.289 39.289-66.78 96.005-66.78 161.231 0 65.256 27.522 121.974 66.78 161.231 2.813 2.813 6.637 4.394 10.615 4.394s7.793-1.581 10.606-4.394c39.248-39.247 66.78-95.96 66.78-161.231.001-65.256-27.511-121.964-66.78-161.231z" />
+                                    </svg>
+
+                                </a>
+                                <!---->
+                            </div>
+                            <!--================ Search Bar ============-->
+                            <div data-v-2158a69f="" class="search-flex-box">
+                                <input data-v-2158a69f="" id="webSearch" type="text" placeholder="Search" class="searchInput">
+                                <span data-v-2158a69f="" id="search-icon" class="ClickToSearch" style="color: rgb(102, 102, 102); cursor: not-allowed;">
+                                    <i data-v-2158a69f="" style="font-size:24px;" class="fa fa-search"></i>
+                                </span>
+                                <!--===================== Close Button ==================-->
+                                <div data-v-2158a69f="" class="closeSearchBtn"></div>
+                                <div data-v-2158a69f="" class="history-div" style="display: none;">
+                                    <div data-v-2158a69f="" id="historySearch">
+                                        <div data-v-2158a69f="" class="title">Recent Searches</div>
+  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <main style="background:#1f1f1f">
+        <section id="sec-542c" data-image-width="1920" data-image-height="1280"
+        data-bottom-top="background-position: 50% 0vh;" data-top-bottom="background-position: 50% -20vh" 
+        style="background-image:url(/Image/background_Image/bg-1920.5a4ec219.jpg);background-attachment: fixed; background-position: 50% -13.7124vh;">
+
+            <div class="container-fluid page-100" style="padding-top:50px;">
+                <div class="row">
+        
+                    @RenderBody()
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+    <footer>
+        <div data-v-78b326c3="" class="aorus-footer pt-4 pb-3">
+
+            <img data-v-78b326c3="" src="~/Image/logo_Image/EduvoLogo.png" alt="" srcset="" style="border-radius:10px;" width="180" height="82">
+
+            <br data-v-78b326c3="">
+            <span data-v-78b326c3="" data-text="  EDUVO!" class="slogan mt-4 glitch content__title">
+                EDUVO!
+            </span>
+            <br />
+            <span data-v-78b326c3="" data-text="TEAM UP. FIGHT ON." class="slogan mt-4 glitch content__title">
+                TEAM UP. FIGHT ON.
+            </span>
+            <br data-v-78b326c3="">
+            <div data-v-78b326c3="" class="sns-div">
+                <a data-v-78b326c3="" href="https://www.facebook.com/EduvoSB" target="_blank" rel="noopener" class="GA-Social-Icon">
+                    <i data-v-78b326c3="" style="font-size:28px;" class="fa fa-facebook-f"></i>
+                </a>
+                <!---->
+
+                <a data-v-78b326c3="" href="https://www.youtube.com/" target="_blank" rel="noopener" class="GA-Social-Icon">
+                    <i data-v-78b326c3="" style="font-size:28px;" class="fa fa-youtube"></i>
+                </a>
+                <a data-v-78b326c3="" href="https://www.instagram.com/eduvomy/" target="_blank" rel="noopener" class="GA-Social-Icon">
+                    <i data-v-78b326c3="" style="font-size:28px;" class="fa fa-instagram"></i>
+                </a>
+                <!----><!----><!----><!----><!----><!----><!---->
+            </div>
+            <div data-v-78b326c3="" class="footer-list-div">
+                <div data-v-78b326c3="" class="footer-col-5">
+                    <div data-v-78b326c3="" class="title fontAldrich">
+                        ABOUT US
+                    </div>
+                    <div data-v-78b326c3="" class="content">
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" target="_blank" rel="noopener" href="https://www.eduvoacademy.edu.my/" title="About Eduvo">About EDUVO</a>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-78b326c3="" class="footer-col-5">
+                    <div data-v-78b326c3="" class="title fontAldrich">PRODUCTS</div>
+                    <div data-v-78b326c3="" class="content">
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/Motherboards" title="Motherboard">Motherboards</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/Graphic_Card" title="Graphics-Card">Graphics Cards</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/Laptops" title="Laptop">Laptops</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/Monitors" title="Monitor">Monitors</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/PC_Dekstop" title="Desktop-PC">Desktop PC</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/PC_Peripherals" title="Desktop-PC">PC Peripherals</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="~/Products/PC_Components" title="Desktop-PC">PC Components</a>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-78b326c3="" class="footer-col-5">
+                    <div data-v-78b326c3="" class="title fontAldrich">EXPLORE</div>
+                    <div data-v-78b326c3="" class="content">
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://my.aorus.com/news.php">News</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://my.aorus.com/event.php">Events</a>
+                        </div><div data-v-78b326c3=""><a data-v-78b326c3="" href="https://my.aorus.com/blog.php">Blog</a></div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://my.aorus.com/wallpaper.php">Wallpaper</a>
+                        </div>
+                    </div>
+                </div><div data-v-78b326c3="" class="footer-col-5">
+                    <div data-v-78b326c3="" class="title fontAldrich">MEMBERSHIP </div>
+                    <div data-v-78b326c3="" class="content">
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/whyjoin" title="Why Join?">Why Join?</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/level" title="Membership Levels">Membership Levels</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/aboutpointrewards" title="AORUS Points &amp; Rewards">AORUS Points &amp; Rewards</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/achievement_badges" title="Achievement Badges">Achievement Badges</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/rankboard" title="Member Leaderboard">Member Leaderboard</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/FAQ" title="Member FAQs">Member FAQs</a>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-78b326c3="" class="footer-col-5">
+                    <div data-v-78b326c3="" class="title fontAldrich">SERVICE </div>
+                    <div data-v-78b326c3="" class="content">
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://www.gigabyte.com/my/WheretoBuy/Consumer" target="_blank" rel="noopener" title="Where To Buy" class="btn-wtb-gigabyte">Find a Store</a>
+                        </div>
+                        <!---->
+                        <!---->
+
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/productwarranty" title="Warranty Information">Warranty Information</a>
+                        </div><div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://esupport.gigabyte.com" target="_blank" rel="noopener" title="Contact Us">Contact Us</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://www.gigabyte.com/my/Support/FAQ" target="_blank" rel="noopener" title="FAQ">FAQ</a>
+                        </div>
+                        <div data-v-78b326c3="">
+                            <a data-v-78b326c3="" href="https://member.aorus.com/my/url/aHR0cHM6Ly9tZW1iZXIuYW9ydXMuY29tL3Byb2R1Y3QvcmVnaXN0ZXI=" title="Product Registration">Product Registration</a>
+                        </div>
+                        <!---->
+                        <!---->
+                        <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-v-c7760ac0="" class="aorus-copyright-lang-div">
+            <div data-v-c7760ac0="" class="aorus-container py-4">
+                <div data-v-c7760ac0="" class="row">
+                    <div data-v-c7760ac0="" class="col-12 flex-container">
+                        <div data-v-c7760ac0="" class="lang-change">
+                            <a data-v-c7760ac0="" href="#">
+
+                                Malaysia (English)
+                            </a>
+                        </div><div data-v-c7760ac0="" class="copyright">
+                            <span data-v-c7760ac0="">©2023 Student Assignment All no rights reserved. </span>
+                            <span data-v-c7760ac0="" class="mx-2"> | </span>
+                            <span data-v-c7760ac0="">
+                                <a data-v-c7760ac0="" href="https://profile.gigabyte.com/TermsOfUse.aspx" target="_blank" rel="noopener">Terms Of Use</a>
+                            </span>
+                            <span data-v-c7760ac0="" class="mx-2"> | </span>
+                            <span data-v-c7760ac0="">
+                                <a data-v-c7760ac0="" href="https://profile.gigabyte.com/PrivacyPolicy.aspx" target="_blank" rel="noopener">Privacy Policy</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div><div data-v-c7760ac0="" class="colorbottom"></div>
+        </div>
+    </footer>
+    <div id="student-disclaimer" class="student-disclaimer-bar">
+        <div class="container-fluid">
+            <div class="disclaimer-content">
+                <span class="disclaimer-text">
+                    <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true" style="margin-right: 8px;"></i>
+                    <strong>WARNING:</strong> This is a Demo for presentation only.
+                    No real transactions. Do not use real credit cards.
+                    | please contact *+60-149342218 or
+                    ***REMOVED*** * for closure.
+                </span>
+
+                <a id="close-disclaimer" title="Close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/ExternalSide/nicePage/nicePage.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <!--Global Js-->
+    <script src="~/js/global/Side_Cart.js"></script>
+    <script src="~/js/global/StoreLayout.js?1"></script>
+    <script src="~/js/global/LayoutSearch.js?1"></script>
+    <script src="~/js/global/CheckLogin.js"></script>
+    <script>
+      console.log("sample account : customer@gmail.com");
+      console.log("ps : Abc12345678");
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "CartList";
+    Layout = "~/Views/Shared/Customer/CartList_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/global/ButtonAnimated.css" />
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .btn-yellow{
+        transition:.2s ease;
+        color:white !important;
+        font-size:20px;
+        
+    }
+    .btn-yellow:hover{
+
+    }
+</style>
+
+
+<div class="container mb-3" style="padding:20px 60px 0px 60px">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="text-align:left !important;justify-content:space-between" class="h1 page-title text-center mt-5 mb-2 fontAorus">
+
+                My Cart List
+
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-md-8 my-2 text-center  float-left">
+            <div id="bigdetails">
+            </div>
+
+            <div class="cartScript"></div>
+        </div>
+
+
+        <div class="col-xs-12  col-md-4  float-left summaryBigContainner">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-12 col-md-12  aorus-input float-left orderSummaryContainer">
+                            <div style="margin-bottom:20px;">
+
+                                <span class="fontAldrich" style="font-size:20px">Order Summary</span>
+                                <span style="float:right;font-size:24px;" class="cartItemCount fontAorus"></span>
+
+                            </div>
+                            <div class="fontContent">
+                                Shipping Address : 
+                                <address id="cusAddress">
+
+                                </address>
+                            </div>
+                            <div class="fontContent" style="font-size:18px">
+
+                                Sub-Total :  <span id="subTotal" class="fontAorus"></span>
+
+                                <div style="width:100%" class="col-xs-12 col-sm-12 col-md-6 col-lg-4 aorus-input shippingContainer">
+
+                                    <span>Shipping </span>
+                                    <select class="form-control select shippingSelect">
+                                        <option value="">-- select --</option>
+                                        <option value="5">Normal(RM 5)</option>
+                                        <option value="15">J&G(RM 15)</option>
+                                        <option value="25">GetLaju(RM 25)</option>
+
+
+                                    </select>
+                                    <span id="shipError"  style="display:none;color:red"> ** Have to choice a shipping method</span>
+                                </div>
+                                <br />
+                                <div class="grandTotal">
+                                    Grand-Total :  <span id="grandTotalNum" class="fontAorus"></span>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <button style="--clr:#ff6400" class="btn-7 btn-yellow processToCheckout fontAorus"><span>Place Order</span><i></i></button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<div class="custom-model-main ">
+    <div class="custom-model-inner">
+        <div class="closeSuccess-btn">×</div>
+        <div class="custom-model-wrap">
+            <div class="pop-up-content-wrap fontAorus">
+               Have to complete the Account Address to place Order
+            </div>
+        </div>
+    </div>
+    <div class="bg-overlay"></div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/customer/CartList.js?2"></script>

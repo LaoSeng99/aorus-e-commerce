@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Overview";
+    Layout = "~/Views/Shared/Customer/Profiles_Layout.cshtml";
+}
+
+<style>
+    #RecOrderTable tr {
+        display:flex;
+        background-color:rgba(0,0,0,.6);
+        padding:5px 10px;
+        border:solid white 1px;
+    }
+     #RecOrderTable tr td:nth-child(1){
+         flex:0.15;
+     }
+         #RecOrderTable tr td:nth-child(2){
+         flex:0.15;
+     }
+         #RecOrderTable tr td:nth-child(3){
+         flex:0.4
+     }
+             #RecOrderTable tr td:nth-child(4){
+         flex:0.1
+     }
+         #RecOrderTable tr td:nth-child(5){
+         flex:0.2
+     }
+
+    .btn-yellow:hover{
+        color:white;
+        background-color: #fabb11;
+    }
+      #TableDiv {
+            display: flex;
+            height: 300px;
+            width: 100%;
+            overflow: auto;
+            padding: 20px;
+            box-shadow: 1px 2px 2px rgba(0,0,0.2);
+            margin-right: auto;
+            margin-left: auto;
+        }
+</style>
+<div id="Overview" class="container mb-3" style="padding-left:60px;padding-right:60px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="h1 page-title text-center mt-5 mb-2">Overview</div>
+        </div>
+        <div class="col-xs-12 col-md-4 my-2 text-center  float-left">
+            <div class="bg-gray-333 p-3 rounded">
+                <div class="member-img">
+                    <img src="https://member.aorus.com/images/pic-default.jpg" alt="">
+                </div>
+                <h3><div id="User_Name_avatar"></div></h3>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12  col-md-8  float-left">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="row">
+
+                        <div style="padding:20px;min-height:auto;max-height:300px;" class="col-xs-12 col-sm-12 col-md-6  aorus-input float-left">
+                            <div style="margin-bottom:20px;">
+
+                                <span class="fontAldrich" style="font-size:20px">My Profile </span>
+                                <a href="/Customer_Profiles/Edit_profiles" style="float:right" class="btn btn-black btn-block mt-2 edit-picture-btn"> Edit</a>
+                            </div>
+                            <div class="fontContent" style="font-size:18px">
+                                Name :  <span id="ov_nickname">Seghot Ong</span>
+                            </div>
+
+                            <div class="fontContent">
+                                Email :  <span id="ov_email">123@gmail.com</span>
+                            </div>
+                        </div>
+
+                        <div style="padding:20px;min-height:auto;max-height:300px;" class="col-xs-12 col-sm-12 col-md-6  aorus-input float-left">
+                            <div style="margin-bottom:20px;">
+
+                                <span class="fontAldrich" style="font-size:20px">My Shipping Address</span>
+                                <a href="/Customer_Profiles/Change_address" style="float:right" class="btn btn-black btn-block mt-2 edit-picture-btn"> Edit</a>
+                            </div>
+                            <div class="fontContent" style="font-size:18px">
+                                <address id="ov_address">
+                                    Address Line 1<br>
+                                    Address Line 2<br>
+                                    City,State<br />
+                                    Zip code,Country
+                                </address>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div style="display:flex; justify-content:space-between"> 
+                            <h1>Recently Orders</h1>
+                            <button id="lastestBtn" onclick="sortTable(1,Number)" class="btn btn-black">By Latest</button>
+
+                        </div>
+                       <div id="TableDiv" style="">
+                            <table style="width:100%" id="RecOrderTable">
+                            </table>
+                        </div>
+                        <h4 style="text-align:right"> View More >></h4>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/customer/Overview.js?3"></script>
+
+<script>
+    $(function () {
+        $('html, body').animate({
+            scrollTop: $("#Overview").offset().top - 90
+        }, 'slow');
+    })
+</script>

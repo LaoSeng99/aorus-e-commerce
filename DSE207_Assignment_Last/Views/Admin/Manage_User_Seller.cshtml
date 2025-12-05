@@ -1,0 +1,830 @@
+﻿@{
+    ViewData["Title"] = "Manage_User_Seller";
+    Layout = "~/Views/Shared/Admin/Admin_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/plugins/fontawesome-free/css/all.min.css">
+<!-- jsGrid -->
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/plugins/jsgrid/jsgrid-theme.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="~/css/global/AorusFont.css" />
+<link rel="stylesheet" href="~/css/global/buttonEffect.css?2" />
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/List.css" />
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+
+    /* pop out*/
+    .custom-model-main {
+        color: white;
+        text-align: center;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; /* z-index: 1050; */
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+        opacity: 0;
+        -webkit-transition: opacity 0.15s linear, z-index 0.15;
+        -o-transition: opacity 0.15s linear, z-index 0.15;
+        transition: opacity 0.15s linear, z-index 0.15;
+        z-index: -1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .model-open {
+        z-index: 99999;
+        opacity: 1;
+        overflow: hidden;
+    }
+          .modal-backdrop{
+            display:none;
+        }
+
+    .custom-model-inner {
+        color: white;
+        -webkit-transform: translate(0, -25%);
+        -ms-transform: translate(0, -25%);
+        transform: translate(0, -25%);
+        -webkit-transition: -webkit-transform 0.3s ease-out;
+        -o-transition: -o-transform 0.3s ease-out;
+        transition: -webkit-transform 0.3s ease-out;
+        -o-transition: transform 0.3s ease-out;
+        transition: transform 0.3s ease-out;
+        transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+        display: inline-block;
+        vertical-align: middle;
+        width: 600px;
+        margin: 30px auto;
+        max-width: 97%;
+    }
+
+    .custom-model-wrap {
+        display: block;
+        width: 100%;
+        position: relative;
+        background-color: rgba(0,0,0,.8);
+        border: 1px solid #ff6400;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px #ff6400;
+        background-clip: padding-box;
+        outline: 0;
+        text-align: left;
+        padding: 20px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+
+    .model-open .custom-model-inner {
+        -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+        position: relative;
+        z-index: 999;
+    }
+
+    .model-open .bg-overlay {
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 99;
+    }
+
+    .bg-overlay {
+        background: rgba(0, 0, 0, 0);
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        -webkit-transition: background 0.15s linear;
+        -o-transition: background 0.15s linear;
+        transition: background 0.15s linear;
+    }
+
+    .closeSuccess-btn {
+        position: absolute;
+        right: 0;
+        top: -30px;
+        cursor: pointer;
+        z-index: 99;
+        font-size: 30px;
+        color: #fff;
+    }
+
+    .pop-up-content-wrap {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    @@media screen and (min-width:800px) {
+        .custom-model-main:before {
+            content: "";
+            display: inline-block;
+            height: auto;
+            vertical-align: middle;
+            margin-right: -0px;
+            height: 100%;
+        }
+    }
+
+    @@media screen and (max-width:799px) {
+        .custom-model-inner {
+            margin-top: 45px;
+        }
+    }
+
+    #MyTable tr:nth-child(odd) {
+        background-color: rgba(218, 218, 218, 0.8)
+    }
+
+    #MyTable tr:nth-child(even) {
+        background-color: rgba(187, 187, 187, 0.8)
+    }
+
+    #MyTable tr {
+        transition: .2s ease
+    }
+
+        #MyTable tr:not(tr:nth-child(1)):hover {
+            background-color: rgba(100, 100, 100, 0.8);
+            color: #ff6400;
+        }
+
+    #TableDiv {
+        display: flex;
+        height: 500px;
+        width: 100%;
+        overflow: auto;
+        padding: 20px;
+        box-shadow: 1px 2px 2px rgba(0,0,0.2);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .products-row td:nth-child(1) {
+        flex: 0.4 !important;
+        text-align: center;
+    }
+
+    .products-row td:nth-child(2) {
+        flex: 1.6 !important;
+    }
+
+    .products-row td:nth-child(3) {
+        flex: 1 !important;
+    }
+
+    .products-row td:nth-child(4) {
+        flex: 0.5 !important;
+        justify-content: center;
+    }
+
+    .products-row td:nth-child(5) {
+        flex: 0.5 !important;
+        justify-content: center;
+    }
+
+    .products-row td:nth-child(6) {
+        flex: 0.6 !important;
+    }
+
+    .products-row td:nth-child(7) {
+        flex: 1 !important;
+        justify-content: center;
+    }
+
+    .products-row td:nth-child(8) {
+        flex: 1.5 !important;
+    }
+
+
+    th {
+        transition: .2s ease
+    }
+
+        th:hover {
+            background-color: rgba(227, 227, 227, 0.6)
+        }
+
+    .StatusCheck {
+    }
+
+</style>
+<!-- Content Wrapper. Contains page content -->
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header" id="BtnList">
+            <button style="margin-right:10px" id="sellerList" class="card-title btn btn-outline-primary">
+                Seller
+            </button>
+            <button style="margin-right:10px" id="UnapprovalList" class="card-title btn btn-outline-warning">
+                Approval Seller
+            </button>
+
+            <button style="display:none;margin-right:10px" id="ProductList" class="card-title btn btn-outline-success">          </button>
+            <button style="display:none" id="Statistics" class="card-title btn btn-outline-info">     </button>
+
+
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body SellerInfo">
+            <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+                <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                    <table class="jsgrid-table">
+                        <tr class="jsgrid-header-row">
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;">
+                                All
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;">
+                                Id
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:125px;">
+                                Name
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 125px;">
+                                Email
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:120px;">
+                                Phone
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:50px;">
+                                Status
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:130px;">
+                                Approval At
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:130px;">
+                                Registered At
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:80px;">
+                                Product List
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:80px;">
+                                Statistics List
+                            </th>
+                        </tr>
+                        <tr class="jsgrid-filter-row">
+                            <td class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">
+                                <input id="SellerAllSelect" style="width:22px;height:22px" class="product_Select" type="checkbox" />
+                            </td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">
+                                <input id="id" class="Sellinput" type="number" placeholder="Id...">
+                            </td>
+                            <td class="jsgrid-cell" style="width:125px;">
+                                <input id="Fname"class="Sellinput" type="text" placeholder="First Name...">
+                            </td>
+                            <td class="jsgrid-cell" style="width: 125px;">
+                                <input id="email"class="Sellinput" type="text" placeholder="Email...">
+                            </td>
+                            <td style="width:100px">
+                                <input id="phone" class="Sellinput" type="text" placeholder="Phone...">
+                            </td>
+                            <td class="jsgrid-cell jsgrid-align-center" style="width: 130px;">
+                                <i class="fa fa-check-circle" id="StatusBtn"
+                                   style="margin-left:10px;font-size:24px ;color:blue;cursor:pointer;"></i>
+                            </td>
+                         
+                        </tr>
+                    </table>
+                </div>
+                <div class="jsgrid-grid-body" style="height: 433px;">
+                    <table class="jsgrid-table">
+                        <tbody id="SellerList">
+                        </tbody>
+
+                        <div style="display:none;" class="multiBtnSellerContainer">
+                            <div id="MultiBtnDiv" style="display:flex;position:absolute;bottom:40px;right:40px;z-index:2;justify-content:space-between;width:220px">
+                                <button class="btn btn-success" id="activeSelectedSeller" style="width:100px;padding:5px 10px">Active</button>
+                                <button class="btn btn-warning" id="disabledSelectedSeller" style="width:100px;padding:5px 10px">Disabled</button>
+
+
+                            </div>
+                        </div>
+
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="display:none" class="card-body approvalList">
+            <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+                <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                    <table class="jsgrid-table">
+                        <tr class="jsgrid-header-row">
+
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;">
+                                Id
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:125px;">
+                                Name
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 125px;">
+                                Email
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:120px;">
+                                Phone
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:50px;">
+                                Status
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:130px;">
+                                Approval At
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:130px;">
+                                Registered At
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:80px;">
+                                Information
+                            </th>
+                        </tr>
+                        <tr class="jsgrid-filter-row">
+
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">
+                                <input id="id" class="UnAprinput" type="number" placeholder="Id...">
+                            </td>
+                            <td class="jsgrid-cell" style="width:125px;">
+                                <input id="Fname" class="UnAprinput" type="text" placeholder="First Name...">
+                            </td>
+                            <td class="jsgrid-cell" style="width: 125px;">
+                                <input id="email" class="UnAprinput" type="text" placeholder="Email...">
+                            </td>
+                            <td style="width:100px">
+                                <input id="phone" class="UnAprinput" type="text" placeholder="Phone...">
+                            </td>
+                            <td class="jsgrid-cell jsgrid-align-center" style="width: 130px;">
+                                <i class="fa fa-check-circle" id="StatusBtn"
+                                   style="margin-left:10px;font-size:24px ;color:blue;cursor:pointer;"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="jsgrid-grid-body" style="height: 443px;">
+                    <table class="jsgrid-table">
+                        <tbody id="UnApprovalList">
+                        </tbody>
+                    </table>
+
+                    <!-- Input addon -->
+                    <div id="InforTable" style="display:none" class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Seller Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Name</span>
+                                </div>
+                                <input readonly id="SellerInfoName" type="text" class="form-control" placeholder="Username">
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input readonly id="SellerInfoEmail" type="email" class="form-control" placeholder="Email">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Phone Number</span>
+                                </div>
+                                <input readonly id="SellerInfoPhone" type="text" class="form-control" placeholder="Phone Number">
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Address Line 1</span>
+                                </div>
+                                <input readonly id="SellerInfoAdl1" type="text" class="form-control" placeholder="Address Line 1">
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Address Line 2</span>
+                                </div>
+                                <input readonly id="SellerInfoAdl2" type="text" class="form-control" placeholder="Address Line 2">
+
+                            </div>
+
+                            <div class="cityStateZip" style="display:flex;justify-content:space-between">
+
+                                <div class="input-group mb-3" style="width:300px">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">City</span>
+                                    </div>
+                                    <input readonly id="SellerInfoCity" type="text" class="form-control" placeholder="City">
+
+                                </div>
+                                <div class="input-group mb-3" style="width:300px">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">State</span>
+                                    </div>
+                                    <input readonly id="SellerInfoState" type="text" class="form-control" placeholder="State">
+
+                                </div>
+                                <div class="input-group mb-3" style="width:300px">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Zip Code</span>
+                                    </div>
+                                    <input readonly id="SellerInfoZipCode" type="text" class="form-control" placeholder="Zip Code">
+
+                                </div>
+                            </div>
+                            <!-- /input-group -->
+                        </div>
+                        <div style="display:flex;justify-content:space-evenly;padding-bottom:20px">
+                            <button style="margin-left:auto;margin-right:auto;width:200px" class="btn btn-outline-primary BackToApprovalList"> Back To List </button>
+
+                            <button style="margin-left:auto;margin-right:auto;width:200px" class="btn btn-outline-success ApprovalBtnInfo"> Approval </button>
+
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div style="display:none" class="card-body ProductList">
+
+            <div style="padding:0px;display:flex;vertical-align:middle">
+
+                <form action="enhanced-results.html">
+                    <div class="row" style="width:200px;">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group" style="width:100%">
+                                        <select id="filterValue" class="select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                            <option value="" disabled>--Search--</option>
+                                            <option value="name" selected="">Product Name</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+                <div class="form-group" style="margin:0px">
+                    <div class="input-group input-group-lg">
+                        <input type="search" id="filterInput" style="height:38px" class="form-control form-control-lg" placeholder="Type your keywords here" value="">
+                        <div class="input-group-append">
+                            <button type="submit" style="height:38px;padding:5px 15px" class="btn btn-lg btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group" style="margin:0px 5px;">
+                    <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret">Category</span>
+                    </button>
+                    <ul class="dropdown-menu catelist" style="padding:5px">
+                        <li>
+                            <a class="small" data-value="all" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>All</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" checked />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="motherboards" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Motherboard</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="laptops" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Laptops</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="monitors" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Monitors</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="pcperipherals" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>PC Peripherals</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="pccomponents" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>PC Components</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="graphiccard" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Graphic Card</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="shoes" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Shoes</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="watchs" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Watchs</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="food" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Food</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="clothes" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Clothes</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="button-group" style="margin:0px 5px;">
+                    <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret">Status</span>
+                    </button>
+                    <ul class="dropdown-menu statuslist" style="padding:5px">
+                        <li>
+                            <a class="small" data-value="all" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>All</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" checked />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="active" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Active</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="small" data-value="disabled" tabIndex="-1" style="display:flex;justify-content:space-between">
+                                <label>Disabled</label>
+                                <input style="width:20px;height:20px;z-index:-1" type="checkbox" />
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <div id="TableDiv" style="">
+
+                <table id="MyTable" style="width:100%">
+                    <thead>
+                    </thead>
+                    <tbody class="products-area-wrapper tableView">
+
+                        <tr class="products-header">
+                            @*    Columns名字 + Funtioncs*@
+                            @*    Filter 功能 Java script*@
+                            <th class="product-cell " @*onclick="sortTable(0,165)"*@ style="flex:0.4">
+
+                                <input id="SelectAll" style="width:22px;height:22px" class="product_Select" type="checkbox" />
+
+                                All
+                            </th>
+                            <th class="product-cell " @*onclick="sortTable(0,165)"*@ style="flex:1.5">
+                                Product Name
+                                @*    <span style="margin-left:10px">
+                                <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                                </span>
+                                *@
+                            </th>
+
+                            <th class="product-cell " style="flex:1">
+                                Category
+
+
+                            </th>
+
+                            <th class="product-cell " onclick="sortTable(3,Number)" style="flex:0.5">
+                                Sales
+                                <span style="margin-left:10px">
+                                    <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                                </span>
+                            </th>
+
+                            <th class="product-cell " onclick="sortTable(4,Number)" style="flex:0.5">
+                                Stock
+                                <span style="margin-left:10px">
+                                    <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                                </span>
+                            </th>
+
+                            <th class="product-cell " onclick="sortTable(5,Number)" style="flex:0.6">
+                                Price
+                                <span style="margin-left:10px">
+                                    <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                                </span>
+                            </th>
+                            <th class="product-cell " onclick="sortTable(6,Number)" style="flex:1">
+                                Last Modifed
+                                <span style="margin-left:10px">
+                                    <i class="fa fa-sort sortBtn" style="font-size:24px;"></i>
+                                </span>
+                            </th>
+                            <th class="product-cell " style="flex:1.5">
+                                Status
+
+                            </th>
+
+                        </tr>
+
+
+                    </tbody>
+                    <div style="display:none;" class="multiBtnContainer">
+
+                        <div id="MultiBtnDiv" style="display:flex;position:absolute;bottom:40px;right:40px;z-index:2;justify-content:space-between;width:450px">
+                            <button class="btn btn-success" id="activeSelectedProduct" style="width:100px;padding:5px 10px">Active</button>
+                            <button class="btn btn-warning" id="disabledSelectedProduct" style="width:100px;padding:5px 10px">Disabled</button>
+                            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-danger" style="width:100px;padding:5px 10px">Delete</button>
+                            <!-- Modal -->
+
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog" style="margin-top:15%">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">DELETE SELECTED PRODUCT</h5>
+                                            <i type="button" class="fa-fa-times" style="font-size:20px" data-bs-dismiss="modal" aria-label="Close"></i>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you confirm to delete these product?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="deleteSelectedProduct" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </table>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="card-body  StatisticsList" style="display:none">
+            <div class="row">
+                <div class="col-md-6">
+
+
+                    <!-- PIE CHART -->
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Top 5 Product Sales</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col (LEFT) -->
+                <div class="col-md-6">
+                    <!-- DONUT CHART -->
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Category sales</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+                <!-- /.col (RIGHT) -->
+            </div>
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BAR CHART -->
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Income (2023)</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <div class="custom-model-main ">
+            <div class="custom-model-inner">
+                <div class="closeSuccess-btn">×</div>
+                <div class="custom-model-wrap">
+                    <div class="pop-up-content-wrap fontAorus">
+                        Are You Sure To Delete This Product?<br /> <strong id="deleteProductName">Product Name</strong>
+                        <br />
+                        <button class="DeleteButton btn btn-black">Yes</button>
+
+                        <button class="CancelBtn btn btn-orange">No</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-overlay"></div>
+        </div>
+
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+<!-- /.content-wrapper -->
+
+<script src="~/ExternalSide/Dashboard/plugins/jquery/jquery.min.js"></script>
+
+<script src="~/ExternalSide/Dashboard/plugins/jsgrid/demos/db.js"></script>
+<script src="~/ExternalSide/Dashboard/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="~/ExternalSide/Dashboard/plugins/chart.js/Chart.min.js"></script>
+<script src="~/js/admin/SellerList.js?4">
+
+</script>
+<script>
+
+
+</script>

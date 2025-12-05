@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Manage_User_Customer";
+    Layout = "~/Views/Shared/Admin/Admin_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/plugins/fontawesome-free/css/all.min.css">
+<!-- jsGrid -->
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/plugins/jsgrid/jsgrid-theme.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/ExternalSide/Dashboard/dist/css/adminlte.min.css">
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Customer</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+                <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                    <table class="jsgrid-table">
+                        <tr class="jsgrid-header-row">
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;">
+
+                                All
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;">
+                                Id
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:125px;">
+                                First Name
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:125px;">
+                                Last Name
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 150px;">
+                                Email
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width:120px;">
+                                Phone
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:100px;">
+                                Status
+                            </th>
+                            <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width:130px;">
+                                Registered_At
+                            </th>
+                        </tr>
+                        <tr class="jsgrid-filter-row">
+                            <td class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">
+
+                                <input id="SelectAll" style="width:22px;height:22px" class="product_Select" type="checkbox" />
+
+                            </td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">
+                                <input id="id" type="number" placeholder="Id...">
+                            </td>
+                            <td class="jsgrid-cell" style="width:125px;">
+                                <input id="Fname" type="text" placeholder="First Name...">
+                            </td>
+                            <td class="jsgrid-cell" style="width:125px;">
+                                <input id="Lname" type="text" placeholder="Last Name...">
+                            </td>
+                            <td class="jsgrid-cell" style="width: 150px;">
+                                <input id="email" type="text" placeholder="Email...">
+                            </td>
+                            <td style="width:100px">
+                                <input id="phone" type="text" placeholder="Phone...">
+                            </td>
+                            <td class="jsgrid-cell jsgrid-align-center" style="width: 130px;">
+                                <i class="fa fa-check-circle" id="StatusBtn"
+                                   style="margin-left:10px;font-size:24px ;color:blue;cursor:pointer;"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="jsgrid-grid-body" style="height: 460px;">
+                    <table class="jsgrid-table">
+                        <tbody id="UserList">
+                        </tbody>
+                        <div style="display:none;" class="multiBtnContainer">
+                            <div id="MultiBtnDiv" style="display:flex;position:absolute;bottom:40px;right:40px;z-index:2;justify-content:space-between;width:220px">
+                                <button class="btn btn-success" id="activeSelectedCustomer" style="width:100px;padding:5px 10px">Active</button>
+                                <button class="btn btn-warning" id="disabledSelectedCustomer" style="width:100px;padding:5px 10px">Disabled</button>
+
+
+                            </div>
+                        </div>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+<!-- /.content-wrapper -->
+
+<script src="~/ExternalSide/Dashboard/plugins/jquery/jquery.min.js"></script>
+
+<script src="~/ExternalSide/Dashboard/plugins/jsgrid/demos/db.js"></script>
+<script src="~/ExternalSide/Dashboard/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="~/js/admin/CustomerList.js?4">
+
+</script>

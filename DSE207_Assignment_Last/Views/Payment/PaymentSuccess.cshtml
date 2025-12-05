@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "PaymentSuccess";
+    Layout = "~/Views/Shared/Customer/Profiles_Layout.cshtml";
+}
+<style>
+    .success-page {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+        .success-page img {
+            max-width: 62px;
+            display: block;
+            margin: 0 auto;
+        }
+
+    .btn-view-orders {
+        display: block;
+        border: 1px solid #47c7c5;
+        width: 150px;
+        margin: 0 auto;
+        margin-top: 45px;
+        padding: 10px;
+        color: #fff;
+        background-color: #47c7c5;
+        text-decoration: none;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #47c7c5;
+        margin-top: 25px;
+    }
+
+    a {
+        color: var(--app-content-main-color);
+        text-decoration: none;
+    }
+    .content{
+        transition:color .2s ease-in-out
+    }
+    .continue:hover{
+        color:#ff6400
+    }
+</style>
+<link rel="stylesheet" href="~/css/global/AorusFont.css" />
+<link rel="stylesheet" href="~/css/global/buttonEffect.css" />
+<div class="success-page">
+    <svg class="progress-icon" width="200" height="200" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <g class="tick-icon" stroke-width="2" stroke="#5dbd6c" fill="none" transform="translate(1, 1.2)">
+            <path id="tick-outline-path" d="M14 28c7.732 0 14-6.268 14-14S21.732 0 14 0 0 6.268 0 14s6.268 14 14 14z" opacity="0" />
+            <path id="tick-path" d="M6.173 16.252l5.722 4.228 9.22-12.69" opacity="0" />
+        </g>
+    </svg>
+
+    <h2 class="fontAorus">Payment Successful !</h2>
+    <p class="fontContent">We are delighted to inform you that we received your payments</p>
+
+    <a style="margin-bottom:10px;" href="~/Customer_Profiles/Overview" class="btn btn-black fontAorus">Check Order</a>
+    <br />
+    <a class="fontContent continue" href="~/ProductList/Category?=all">Continue Shopping</a>
+</div>
+
+
+<script src="https://unpkg.com/popmotion@7.8.2/dist/popmotion.global.min.js"></script>
+<script src="https://unpkg.com/stylefire@1.1.4/dist/stylefire.min.js"></script>
+
+<script>
+    function ShowError() {
+        document.getElementById("ErrorMsg").innerHTML = "* This service temporarily maintains *"
+        document.getElementById("ErrorMsg2").innerHTML = "* Try Again Later *"
+    }
+    'use strict';
+
+    var _window$popmotion = window.popmotion;
+    var tween = _window$popmotion.tween;
+    var physics = _window$popmotion.physics;
+    var easing = _window$popmotion.easing;
+    var transform = _window$popmotion.transform;
+    var easeIn = easing.easeIn;
+    var interpolate = transform.interpolate;
+
+    function showTick() {
+        var circleStyler = styler(document.getElementById('tick-outline-path'));
+        var tickStyler = styler(document.getElementById('tick-path'));
+
+        var spinCircle = physics({
+            velocity: 0,
+            onUpdate: function onUpdate(v) {
+                return circleStyler.set('rotate', v);
+            }
+        });
+
+        var mapCircleOpacityToLength = interpolate([0, 1], [0, 65]);
+        var openOutline = tween({
+            ease: easeIn,
+            onUpdate: function onUpdate(v) {
+                return circleStyler.set({
+                    opacity: v,
+                    pathLength: mapCircleOpacityToLength(v)
+                });
+            },
+            onComplete: function onComplete() {
+                return spinCircle.start();
+            }
+        }).start();
+
+        setTimeout(function () {
+            // Complete the circle
+            tween({
+                from: circleStyler.get('pathLength'),
+                to: 100,
+                onUpdate: function onUpdate(v) {
+                    return circleStyler.set('pathLength', v);
+                }
+            }).start();
+
+            // Slow the spinning
+            spinCircle.setProps({
+                friction: 0.6
+            });
+
+            // Draw tick
+            tween({
+                onUpdate: function onUpdate(v) {
+                    return tickStyler.set({
+                        opacity: v,
+                        pathLength: v * 100
+                    });
+                }
+            }).start();
+        }, 500);
+    }
+
+    if (document.readyState != 'loading') {
+        setTimeout()
+     ;
+    } else {
+        document.addEventListener('DOMContentLoaded', showTick);
+    }
+</script>
