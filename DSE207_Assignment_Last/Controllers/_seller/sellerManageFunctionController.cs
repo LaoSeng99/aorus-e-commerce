@@ -28,7 +28,11 @@ namespace DSE207_Assignment_Last.Controllers._seller
             public ProductImage? images { get; set; }
             public CartDetails? cartDetails { get; set; }
         }
-        AppDbContext db = new AppDbContext();
+        private AppDbContext db;
+        public sellerManageFunctionController(AppDbContext db)
+        {
+            this.db = db;
+        }
         public ActionResult CheckLogin()
         {
             var x = HttpContext.Session.GetString("seller");

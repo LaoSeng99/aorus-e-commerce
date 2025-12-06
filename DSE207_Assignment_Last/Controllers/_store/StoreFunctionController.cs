@@ -14,7 +14,11 @@ namespace DSE207_Assignment_Last.Controllers._store
             public Products? product { get; set; }
             public ProductImage? images { get; set; }
         }
-        AppDbContext db = new AppDbContext();
+        private AppDbContext db;
+        public StoreFunctionController(AppDbContext db)
+        {
+            this.db = db;
+        }
         public ActionResult ProductCounting(string Category)
         {
             switch (Category.ToLower())

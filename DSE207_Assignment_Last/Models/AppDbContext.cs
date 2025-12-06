@@ -10,6 +10,9 @@ namespace DSE207_Assignment_Last.Models
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
 
         public DbSet<Admins> Admins { get; set; } = null!;
         public DbSet<Customers> Customers { get; set; } = null!;
@@ -34,17 +37,7 @@ namespace DSE207_Assignment_Last.Models
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
-
-        {    //                                                   ((更改成database的server name))
-
-            //optionBuilder.UseSqlServer(@"Server= ((copyfromyourSQLServer-Servername)) ;Database=namethedatabasename; Trusted_Connection=True;");
-
-            optionBuilder.UseSqlServer(@"Server=LAOSENG\SQLEXPRESS;Database=DSE_207_Assignment_Final; Trusted_Connection=True;");
-
-            // 三个nuget packgage 6.0.11 version  entityframework.core/tools/sqlserver
-            //然后tools > manage nuget package
-            //-- Add-migration intial
-            //-- update-database
+        {    
         }
     }
 }

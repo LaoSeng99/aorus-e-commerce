@@ -1,0 +1,26 @@
+﻿version: '3.8'
+name: aorus-e-commerce-web
+services:
+  aorus-e-commerce:
+    build: . 
+    container_name: aorus-e-commerce
+    image: aorus-e-commerce:latest
+    networks:
+      - mssql-db
+      - cloudflared-net
+    ports:
+      - "8001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=mssql-server,1433;Database=DSE_207_Assignment_Final;User Id=sa;Password=Laoseng@StrongPass!2025;TrustServerCertificate=True;
+
+      - TZ=Asia/Kuala_Lumpur
+    restart: unless-stopped
+
+networks:
+  mssql-db:
+    external: true
+    name: aorus-e-commerce-network
+  cloudflared-net:
+    external: true      
+    name: cloudflared-network

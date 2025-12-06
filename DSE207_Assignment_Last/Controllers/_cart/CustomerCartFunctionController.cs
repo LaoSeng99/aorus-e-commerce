@@ -9,7 +9,11 @@ namespace DSE207_Assignment_Last.Controllers._cart
 {
     public class CustomerCartFunctionController : Controller
     {
-        public AppDbContext db = new AppDbContext();
+        private AppDbContext db;
+        public CustomerCartFunctionController(AppDbContext db)
+        {
+            this.db = db;
+        }
         public IActionResult getCartItemCount()
         {
             var x = HttpContext.Session.GetString("customer");
@@ -166,7 +170,6 @@ namespace DSE207_Assignment_Last.Controllers._cart
 
         public ActionResult getSubTotal()
         {
-            db = new AppDbContext();
             var x = HttpContext.Session.GetString("customer");
             var FoundCart = db.Cart.FirstOrDefault(e => e.Status == "Pending"
                         && e.Customers!.CustomerId == x);

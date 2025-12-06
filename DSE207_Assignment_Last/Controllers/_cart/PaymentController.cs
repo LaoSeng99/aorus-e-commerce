@@ -19,7 +19,6 @@ namespace DSE207_Assignment_Last.Controllers._cart
 
     public class PaymentController : Controller
     {
-        AppDbContext db = new AppDbContext();
         private readonly DtoStripeSecrets _stripeSecrets;
 
         static DtoStripeSecrets stripeSecrets = new DtoStripeSecrets()
@@ -27,6 +26,12 @@ namespace DSE207_Assignment_Last.Controllers._cart
             SecretKey = "***REMOVED***",
             PublishableKey = "***REMOVED***"
         };
+
+        private AppDbContext db;
+        public PaymentController(AppDbContext db)
+        {
+            this.db = db;
+        }
 
         [Route("/PaymentCheckOutPage/{ordersid?}/{cartId?}")]
         public IActionResult PaymentCheckOutPage()
@@ -235,7 +240,7 @@ namespace DSE207_Assignment_Last.Controllers._cart
         }
         public void SendInvoiceToEmail(Sellers seller, Customers customers, Orders order, List<CartDetails> cartList)
         {
-
+            return;
             Random random = new Random();
 
             string InvoicePart1 = $"\r\n" +

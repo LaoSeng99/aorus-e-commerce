@@ -12,7 +12,11 @@ namespace DSE207_Assignment_Last.Controllers._seller
 {
     public class sellerLoginFunctionController : Controller
     {
-        AppDbContext db = new AppDbContext();
+        private AppDbContext db;
+        public sellerLoginFunctionController(AppDbContext db)
+        {
+            this.db = db;
+        }
         [HttpPost]
         public IActionResult Login(string login, string loginId, string password)
         {
@@ -188,14 +192,16 @@ namespace DSE207_Assignment_Last.Controllers._seller
         }
         public string OTPresetPhone(string id)
         {
-            var accountSid = "***REMOVED***";
-            var authToken = "***REMOVED***";
-            TwilioClient.Init(accountSid, authToken);
-
+       
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLNMOPQRSTUVWXYZ123456789";
             var x = new string(Enumerable.Repeat(chars, 16)
              .Select(s => s[random.Next(0, chars.Length)]).ToArray());
+            return x;
+
+            var accountSid = "***REMOVED***";
+            var authToken = "***REMOVED***";
+            TwilioClient.Init(accountSid, authToken);
 
             var messageOptions = new CreateMessageOptions(
                 new PhoneNumber("+60149342218"));
@@ -204,7 +210,7 @@ namespace DSE207_Assignment_Last.Controllers._seller
             var message = MessageResource.Create(messageOptions);
 
 
-            return x;
+         
 
         }
         public string OTPresetEmail(string id)
@@ -214,6 +220,7 @@ namespace DSE207_Assignment_Last.Controllers._seller
             var x = new string(Enumerable.Repeat(chars, 16)
              .Select(s => s[random.Next(0, chars.Length)]).ToArray());
 
+            return x;
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
             email.To.Add(MailboxAddress.Parse(id));
@@ -229,7 +236,6 @@ namespace DSE207_Assignment_Last.Controllers._seller
             smtp.Send(email);
             smtp.Disconnect(true);
 
-            return x;
         }
 
 
@@ -264,6 +270,7 @@ namespace DSE207_Assignment_Last.Controllers._seller
             const string chars = "ABCDEFGHIJKLNMOPQRSTUVWXYZ123456789@#$%&*";
             var x = new string(Enumerable.Repeat(chars, 6)
              .Select(s => s[random.Next(0, chars.Length)]).ToArray());
+            return Json(x);
 
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
@@ -280,7 +287,6 @@ namespace DSE207_Assignment_Last.Controllers._seller
             smtp.Send(email);
             smtp.Disconnect(true);
 
-            return Json(x);
 
 
         }  // True == Enter Right OTP 

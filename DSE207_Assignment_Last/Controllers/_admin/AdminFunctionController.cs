@@ -11,12 +11,17 @@ namespace DSE207_Assignment_Last.Controllers._admin
 {
     public class AdminFunctionController : Controller
     {
+        private AppDbContext db;
+        public AdminFunctionController(AppDbContext db)
+        {
+            this.db = db;
+        }
         private class ProductViewModel
         {
             public Products? product { get; set; }
             public ProductImage? images { get; set; }
         }
-        AppDbContext db = new AppDbContext();
+
         public IActionResult CheckLogin()
         {
             var x = HttpContext.Session.GetString("admin");
@@ -260,8 +265,8 @@ namespace DSE207_Assignment_Last.Controllers._admin
         public ActionResult GetAllCategorySales()
         {
 
-            var Product = db.Products.Include(e=>e.Categories).ToList();
-   
+            var Product = db.Products.Include(e => e.Categories).ToList();
+
             List<CategoriesSalesView> categories = new List<CategoriesSalesView>();
 
             foreach (var pd in Product)

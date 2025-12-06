@@ -13,7 +13,11 @@ namespace DSE207_Assignment_Last.Controllers._customer
 {
     public class CustomerProfilesFunctionController : Controller
     {
-        AppDbContext db = new AppDbContext();
+        private AppDbContext db;
+        public CustomerProfilesFunctionController(AppDbContext db)
+        {
+            this.db = db;
+        }
         public IActionResult CheckLogin()
         {
             var x = HttpContext.Session.GetString("customer");
