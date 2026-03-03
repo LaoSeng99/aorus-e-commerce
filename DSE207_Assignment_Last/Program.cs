@@ -1,6 +1,6 @@
 ﻿using DSE207_Assignment_Last.Models;
+using DSE207_Assignment_Last.Models.Config;
 using Microsoft.EntityFrameworkCore;
-using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +26,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 });
 
-builder.Services.Configure<StripePaymentKey>(builder.Configuration.GetSection("StripePaymentKey"));
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<TwilioSettings>(builder.Configuration.GetSection("TwilioSettings"));
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSettings"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

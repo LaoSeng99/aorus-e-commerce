@@ -125,10 +125,4 @@ namespace DSE207_Assignment_Last.Models
             }
         }
     }
-
-    public class StripePaymentKey
-    {
-        public string SecretKey { get; set; }
-        public string PublishableKey { get; set; }
-    }
 }

@@ -8,15 +8,21 @@ using System.Security.Cryptography.Xml;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
+using DSE207_Assignment_Last.Models.Config;
+using Microsoft.Extensions.Options;
 
 namespace DSE207_Assignment_Last.Controllers._customer
 {
     public class CustomerLoginFunctionController : Controller
     {
         private AppDbContext db;
-        public CustomerLoginFunctionController(AppDbContext db)
+        private EmailSettings emailSettings;
+        private TwilioSettings twilioSettings;
+        public CustomerLoginFunctionController(AppDbContext db, IOptions<EmailSettings> emailOptions, IOptions<TwilioSettings> twilioOptions)
         {
             this.db = db;
+            emailSettings = emailOptions.Value;
+            twilioSettings = twilioOptions.Value;
         }
         [HttpPost]
         public IActionResult Login(string login, string loginId, string password)
@@ -117,10 +123,7 @@ namespace DSE207_Assignment_Last.Controllers._customer
 
         public IActionResult OTPsend(string phoneNumber)
         {
-
-            var accountSid = "***REMOVED***";
-            var authToken = "***REMOVED***";
-            TwilioClient.Init(accountSid, authToken);
+            TwilioClient.Init(twilioSettings.AccountSID, twilioSettings.AuthToken);
 
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLNMOPQRSTUVWXYZ123456789";
@@ -129,7 +132,7 @@ namespace DSE207_Assignment_Last.Controllers._customer
 
             var messageOptions = new CreateMessageOptions(
                 new PhoneNumber("+60149342218"));
-            messageOptions.MessagingServiceSid = "***REMOVED***";
+            messageOptions.MessagingServiceSid = twilioSettings.MessagingServiceSID;
             messageOptions.Body = $"Your Phone Number :{phoneNumber} submit register request for new account ,Your OTP is " + x;
             var message = MessageResource.Create(messageOptions);
 
@@ -148,16 +151,16 @@ namespace DSE207_Assignment_Last.Controllers._customer
             return Json(x);
 
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
+            email.From.Add(MailboxAddress.Parse(emailSettings.SmtpUsername)); //sender Email
             email.To.Add(MailboxAddress.Parse(sendEmail));
             email.Subject = "Test Subject";
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = $"Your Email :{sendEmail} submit register request for new account ,Your New Login Password for Miaodata is " + x };
 
             using var smtp = new SmtpClient();
 
-            smtp.Connect("***REMOVED***", ***REMOVED***);
+            smtp.Connect(emailSettings.SmtpServer, emailSettings.SmtpPort);
 
-            smtp.Authenticate("***REMOVED***", "***REMOVED***");
+            smtp.Authenticate(emailSettings.SmtpUsername, emailSettings.SenderPassword);
 
             smtp.Send(email);
             smtp.Disconnect(true);
@@ -228,20 +231,18 @@ namespace DSE207_Assignment_Last.Controllers._customer
         }
         public string OTPresetPhone(string id)
         {
-    
+
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLNMOPQRSTUVWXYZ123456789";
             var x = new string(Enumerable.Repeat(chars, 16)
              .Select(s => s[random.Next(0, chars.Length)]).ToArray());
             return x;
 
-            var accountSid = "***REMOVED***";
-            var authToken = "***REMOVED***";
-            TwilioClient.Init(accountSid, authToken);
+            TwilioClient.Init(twilioSettings.AccountSID, twilioSettings.AuthToken);
 
             var messageOptions = new CreateMessageOptions(
                 new PhoneNumber("+60149342218"));
-            messageOptions.MessagingServiceSid = "***REMOVED***";
+            messageOptions.MessagingServiceSid = twilioSettings.MessagingServiceSID;
             messageOptions.Body = "Your New Login Password for Miaodata is " + x;
             var message = MessageResource.Create(messageOptions);
         }
@@ -253,25 +254,22 @@ namespace DSE207_Assignment_Last.Controllers._customer
              .Select(s => s[random.Next(0, chars.Length)]).ToArray());
             return x;
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
+            email.From.Add(MailboxAddress.Parse(emailSettings.SmtpUsername)); //sender Email
             email.To.Add(MailboxAddress.Parse(id));
             email.Subject = "Test Subject";
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = $"Your New Login Password for Miaodata is </br> </br><strong style='font-size:24px'>{x.ToString()}</strong>" };
 
             using var smtp = new SmtpClient();
 
-            smtp.Connect("***REMOVED***", ***REMOVED***);
+            smtp.Connect(emailSettings.SmtpServer, emailSettings.SmtpPort);
 
-            smtp.Authenticate("***REMOVED***", "***REMOVED***");
+            smtp.Authenticate(emailSettings.SmtpUsername, emailSettings.SenderPassword);
 
             smtp.Send(email);
             smtp.Disconnect(true);
 
-        
+
         }
-
-
-
         public IActionResult ResetOTPsend(string phoneNumber)
         {
 
@@ -304,21 +302,21 @@ namespace DSE207_Assignment_Last.Controllers._customer
              .Select(s => s[random.Next(0, chars.Length)]).ToArray());
             return Json(x);
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
+            email.From.Add(MailboxAddress.Parse(emailSettings.SmtpUsername)); //sender Email
             email.To.Add(MailboxAddress.Parse(sendEmail));
             email.Subject = "Test Subject";
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = $"Your Email :{sendEmail} submit request for Reset Password ,Your OTP is <strong>" + x + "</strong>" };
 
             using var smtp = new SmtpClient();
 
-            smtp.Connect("***REMOVED***", ***REMOVED***);
+            smtp.Connect(emailSettings.SmtpServer, emailSettings.SmtpPort);
 
-            smtp.Authenticate("***REMOVED***", "***REMOVED***");
+            smtp.Authenticate(emailSettings.SmtpUsername, emailSettings.SenderPassword);
 
             smtp.Send(email);
             smtp.Disconnect(true);
 
- 
+
 
 
         }  // True == Enter Right OTP 

@@ -1,6 +1,7 @@
 ﻿using DSE207_Assignment_Last.Migrations;
 using DSE207_Assignment_Last.Models;
 using DSE207_Assignment_Last.Models.Cart;
+using DSE207_Assignment_Last.Models.Config;
 using DSE207_Assignment_Last.Models.Customer;
 using DSE207_Assignment_Last.Models.Order;
 using DSE207_Assignment_Last.Models.Seller;
@@ -23,7 +24,7 @@ namespace DSE207_Assignment_Last.Controllers._cart
         private readonly DtoStripeSecrets stripeSecrets;
 
         private AppDbContext db;
-        public PaymentController(AppDbContext db, IOptions<StripePaymentKey> options)
+        public PaymentController(AppDbContext db, IOptions<StripeSettings> options)
         {
             this.db = db;
             stripeSecrets = new DtoStripeSecrets()
