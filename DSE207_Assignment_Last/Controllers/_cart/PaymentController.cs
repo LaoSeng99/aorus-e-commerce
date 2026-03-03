@@ -21,17 +21,15 @@ namespace DSE207_Assignment_Last.Controllers._cart
 
     public class PaymentController : Controller
     {
-        private readonly DtoStripeSecrets stripeSecrets;
+        private readonly StripeSettings stripeSecrets;
+        private EmailSettings emailSettings;
 
         private AppDbContext db;
-        public PaymentController(AppDbContext db, IOptions<StripeSettings> options)
+        public PaymentController(AppDbContext db, IOptions<EmailSettings> emailOptions, IOptions<StripeSettings> options)
         {
             this.db = db;
-            stripeSecrets = new DtoStripeSecrets()
-            {
-                SecretKey = options.Value.SecretKey,
-                PublishableKey = options.Value.PublishableKey
-            };
+            stripeSecrets = options.Value;
+            emailSettings = emailOptions.Value;
         }
 
         [Route("/PaymentCheckOutPage/{ordersid?}/{cartId?}")]
@@ -333,7 +331,7 @@ $"    </tr>\r\n   " +
 $" </tbody>\r\n" +
 $"</table>\r\n\r\n";
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
+            email.From.Add(MailboxAddress.Parse(emailSettings.SmtpUsername)); //sender Email
             email.To.Add(MailboxAddress.Parse(customers!.Email));
             email.Subject = "MiaoDaTaInvoice";
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -344,9 +342,9 @@ $"</table>\r\n\r\n";
 
             using var smtp = new SmtpClient();
 
-            smtp.Connect("***REMOVED***", ***REMOVED***);
+            smtp.Connect(emailSettings.SmtpServer, emailSettings.SmtpPort);
 
-            smtp.Authenticate("***REMOVED***", "***REMOVED***");
+            smtp.Authenticate(emailSettings.SmtpUsername, emailSettings.SenderPassword);
 
             smtp.Send(email);
             smtp.Disconnect(true);

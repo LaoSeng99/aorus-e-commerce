@@ -1,9 +1,11 @@
-﻿using DSE207_Assignment_Last.Models.Seller;
-using DSE207_Assignment_Last.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using DSE207_Assignment_Last.Models;
+using DSE207_Assignment_Last.Models.Config;
 using DSE207_Assignment_Last.Models.Customer;
-using MimeKit;
+using DSE207_Assignment_Last.Models.Seller;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using MimeKit;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
@@ -12,10 +14,13 @@ namespace DSE207_Assignment_Last.Controllers._seller
 {
     public class sellerLoginFunctionController : Controller
     {
-        private AppDbContext db;
-        public sellerLoginFunctionController(AppDbContext db)
+        private AppDbContext db; 
+        private EmailSettings emailSettings;
+        public sellerLoginFunctionController(AppDbContext db, IOptions<EmailSettings> emailOptions)
         {
             this.db = db;
+            emailSettings = emailOptions.Value;
+
         }
         [HttpPost]
         public IActionResult Login(string login, string loginId, string password)
@@ -222,16 +227,15 @@ namespace DSE207_Assignment_Last.Controllers._seller
 
             return x;
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
+            email.From.Add(MailboxAddress.Parse(emailSettings.SmtpUsername)); //sender Email
             email.To.Add(MailboxAddress.Parse(id));
             email.Subject = "Test Subject";
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = $"Your New Login Password for Miaodata is </br> </br><strong style='font-size:24px'>{x.ToString()}</strong>" };
 
             using var smtp = new SmtpClient();
+            smtp.Connect(emailSettings.SmtpServer, emailSettings.SmtpPort);
 
-            smtp.Connect("***REMOVED***", ***REMOVED***);
-
-            smtp.Authenticate("***REMOVED***", "***REMOVED***");
+            smtp.Authenticate(emailSettings.SmtpUsername, emailSettings.SenderPassword);
 
             smtp.Send(email);
             smtp.Disconnect(true);
@@ -273,16 +277,16 @@ namespace DSE207_Assignment_Last.Controllers._seller
             return Json(x);
 
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("***REMOVED***")); //sender Email
+            email.From.Add(MailboxAddress.Parse(emailSettings.SmtpUsername)); //sender Email
             email.To.Add(MailboxAddress.Parse(sendEmail));
             email.Subject = "Test Subject";
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = $"Your Email :{sendEmail} submit request for Reset Password ,Your OTP is <strong>" + x + "</strong>" };
 
             using var smtp = new SmtpClient();
 
-            smtp.Connect("***REMOVED***", ***REMOVED***);
+            smtp.Connect(emailSettings.SmtpServer, emailSettings.SmtpPort);
 
-            smtp.Authenticate("***REMOVED***", "***REMOVED***");
+            smtp.Authenticate(emailSettings.SmtpUsername, emailSettings.SenderPassword);
 
             smtp.Send(email);
             smtp.Disconnect(true);

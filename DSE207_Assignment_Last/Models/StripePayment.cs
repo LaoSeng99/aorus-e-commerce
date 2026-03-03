@@ -1,4 +1,5 @@
-﻿using Stripe;
+﻿using DSE207_Assignment_Last.Models.Config;
+using Stripe;
 
 namespace DSE207_Assignment_Last.Models
 {
@@ -11,9 +12,9 @@ namespace DSE207_Assignment_Last.Models
         private bool isTransectionSuccess;
         private _CreditCard _dtoCreditDebitCard;
         private Charge charge;
-        private DtoStripeSecrets _stripeSecrets;
+        private StripeSettings _stripeSecrets;
 
-        public StripePayment(_CreditCard dtoCreditDebitCard, DtoStripeSecrets stripeSecrets)
+        public StripePayment(_CreditCard dtoCreditDebitCard, StripeSettings stripeSecrets)
         {
             this._dtoCreditDebitCard = dtoCreditDebitCard;
             _stripeSecrets = stripeSecrets;
