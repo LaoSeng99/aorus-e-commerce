@@ -26,6 +26,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 });
 
+builder.Services.Configure<StripePaymentKey>(builder.Configuration.GetSection("StripePaymentKey"));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

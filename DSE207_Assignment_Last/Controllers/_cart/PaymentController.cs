@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Options;
 using MimeKit;
 using Stripe;
 using System.Collections.Generic;
@@ -19,18 +20,17 @@ namespace DSE207_Assignment_Last.Controllers._cart
 
     public class PaymentController : Controller
     {
-        private readonly DtoStripeSecrets _stripeSecrets;
-
-        static DtoStripeSecrets stripeSecrets = new DtoStripeSecrets()
-        {
-            SecretKey = "***REMOVED***",
-            PublishableKey = "***REMOVED***"
-        };
+        private readonly DtoStripeSecrets stripeSecrets;
 
         private AppDbContext db;
-        public PaymentController(AppDbContext db)
+        public PaymentController(AppDbContext db, IOptions<StripePaymentKey> options)
         {
             this.db = db;
+            stripeSecrets = new DtoStripeSecrets()
+            {
+                SecretKey = options.Value.SecretKey,
+                PublishableKey = options.Value.PublishableKey
+            };
         }
 
         [Route("/PaymentCheckOutPage/{ordersid?}/{cartId?}")]
